@@ -28,6 +28,15 @@ const NavBar = () => {
           <p>OUR SHOP</p>
         </Link>
       </li>
+      <Link to="" className="flex items-center">
+        <p>SIGNOUT</p>
+
+        <img
+          className=" ml-2 w-8 border-2 rounded-full"
+          src={userLogo}
+          alt=""
+        />
+      </Link>
     </>
   );
   return (
@@ -52,25 +61,18 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-blue-200 text-teal-400 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
         </div>
-        <Link to="" className="btn btn-ghost text-3xl">Bistro Boss</Link>
-      </div>
-     
-      <div className="navbar-end mr-1">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
-        <Link to="" className="flex items-center">
-          <p>SIGNOUT</p>
-
-          <img
-            className=" ml-2 w-8 border-2 rounded-full"
-            src={userLogo}
-            alt=""
-          />
+        <Link to="" className="btn btn-ghost text-lg md:text-3xl">
+          Bistro Boss
         </Link>
+      </div>
+
+      <div className="navbar-end text-sm md:text-lg hidden lg:block mr-1">
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
     </div>
   );
