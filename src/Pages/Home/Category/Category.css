@@ -1,0 +1,12 @@
+/* Change bullet color */
+.swiper-pagination-bullet {
+    width: 20px;  /* Adjust size if needed */
+    height: 20px;
+    opacity: 0.5; 
+    background-color: rgb(209, 57, 57) !important; /* Change to your desired color */
+  }
+  
+  /* Change active bullet color */
+  .swiper-pagination-bullet-active {
+    background-color: rgb(69, 69, 219) !important; /* Change to your desired color */
+  }
