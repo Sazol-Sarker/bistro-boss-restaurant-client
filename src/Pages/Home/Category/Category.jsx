@@ -27,9 +27,10 @@ const Category = () => {
         ></SectionTitle>
       </section>
       <Swiper
+        // className="swiper-container"
         slidesPerView={4}
         // slidesPerView={'auto'}
-        spaceBetween={20}
+        spaceBetween={15}
         grabCursor={true}
         freeMode={true}
         pagination={{
@@ -42,6 +43,7 @@ const Category = () => {
         // loop={true} // Enables infinite looping
         modules={[FreeMode, Pagination]}
         className="mySwiper"
+        
       >
         {/* <SwiperSlide>
         <img src={slideImg1} alt="slideImg1" className="" />

@@ -6,10 +6,16 @@ import bannerImg3 from "../../../assets/home/03.png";
 import bannerImg4 from "../../../assets/home/04.jpg";
 import bannerImg5 from "../../../assets/home/05.png";
 import bannerImg6 from "../../../assets/home/06.png";
-import './Banner.css'
+import "./Banner.css";
 const Banner = () => {
   return (
-    <Carousel showStatus={false} autoPlay={true} interval={3000} showThumbs={true} thumbWidth={80}>
+    <Carousel
+      showStatus={false}
+      autoPlay={true}
+      interval={3000}
+      showThumbs={true}
+      thumbWidth={80}
+    >
       <div>
         <img src={bannerImg1} alt="bannerImg1" />
       </div>

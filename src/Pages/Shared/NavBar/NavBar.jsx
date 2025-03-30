@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import userLogo from "../../../assets/home/user.png";
+import navbarLogo from '../../../assets/navbarLogo.png'
 const NavBar = () => {
   const links = (
     <>
@@ -67,7 +68,8 @@ const NavBar = () => {
           </ul>
         </div>
         <Link to="" className="btn btn-ghost text-lg md:text-3xl">
-          Bistro Boss
+          {/* Bistro Boss */}
+          <img src={navbarLogo} alt="navbarLogo" className="w-40 md:w-52" />
         </Link>
       </div>
 
