@@ -1,0 +1,30 @@
+.react-tabs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border:none;
+  color: #444; /* Default inactive color */
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.react-tabs ul {
+  margin-top: 10px;
+}
+.react-tabs li {
+  text-transform: uppercase;
+}
+/* ,.react-tabs__tab:focus 
+  .react-tabs__tab--selected {
+    
+      color: #bb8506 !important; 
+      border-bottom: 5px solid #BB8506 !important;
+      font-weight: bold;
+      
+  } */
+
+  /* .react-tabs__tab:focus{
+    outline: none;
+  } */

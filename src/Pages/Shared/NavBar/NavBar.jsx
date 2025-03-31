@@ -15,8 +15,8 @@ const NavBar = () => {
         <Link to="/dashboard">DASHBOARD</Link>
       </li>
       <li>
-        <Link to="/menu" className="flex items-center">
-          <p>OUR MENU</p>
+        <Link to="/menu" className="flex items-center uppercase">
+          <p>Our menu</p>
           <img
             className="w-5"
             src="https://img.icons8.com/?size=80&id=23072&format=png"
@@ -25,8 +25,9 @@ const NavBar = () => {
         </Link>
       </li>
       <li>
-        <Link to="/shop" className="flex items-center">
-          <p>OUR SHOP</p>
+        {/* <Link to={`/order/${category} `} className="flex items-center uppercase"> */}
+        <Link to={`/order/offered`} className="flex items-center uppercase">
+          <p>Order food</p>
         </Link>
       </li>
       <Link to="" className="flex items-center">
@@ -73,7 +74,7 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <div className="navbar-end text-sm md:text-lg hidden lg:block mr-1">
+      <div className="navbar-center text-sm md:text-lg hidden lg:block mr-1">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
     </div>

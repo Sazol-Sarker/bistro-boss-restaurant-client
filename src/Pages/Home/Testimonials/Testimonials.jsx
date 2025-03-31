@@ -20,7 +20,7 @@ const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   // console.log("reviews", reviews);
   useEffect(() => {
-    axios.get("reviews.json").then((res) => {
+    axios.get("http://localhost:5000/reviews").then((res) => {
       setReviews(res.data);
     });
   }, []);

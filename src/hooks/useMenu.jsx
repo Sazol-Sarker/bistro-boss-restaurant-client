@@ -7,11 +7,15 @@ const useMenu = () => {
     // console.log(popularMenu);
     // fetch menu items
     useEffect(() => {
-      axios.get("menu.json")
+      axios.get("http://localhost:5000/menu")
       .then((res) => {
         // console.log("MENU",res.data);
         setMenu(res.data);
         setLoading(false)
+      })
+      .catch((error) => {
+        console.error("Error fetching menu:", error);
+        setLoading(false);
       });
     }, []);
     return {menu,loading}

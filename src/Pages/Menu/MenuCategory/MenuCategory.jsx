@@ -9,6 +9,8 @@ const MenuCategory = ({
   heading,
   subHeading,
 }) => {
+  const title =heading===`don't miss`? "offered" :heading.slice(0, -1);
+
   return (
     <div className="my-5">
       {menuTitle ? (
@@ -21,7 +23,7 @@ const MenuCategory = ({
         ></CoverImg>
       )}
 
-      <MenuItemGrid menuItems={menu}></MenuItemGrid>
+      <MenuItemGrid title={title} menuItems={menu}></MenuItemGrid>
     </div>
   );
 };
