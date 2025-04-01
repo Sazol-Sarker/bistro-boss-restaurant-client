@@ -12,6 +12,9 @@ const NavBar = () => {
         <Link to="/contact">CONTACT US</Link>
       </li>
       <li>
+        <Link to="/login">LOG IN</Link>
+      </li>
+      <li>
         <Link to="/dashboard">DASHBOARD</Link>
       </li>
       <li>
