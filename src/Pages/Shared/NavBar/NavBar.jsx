@@ -6,10 +6,12 @@ import AuthContext from "../../../providers/AuthProvider/AuthContext";
 import { toast } from "react-toastify";
 import { BsCart4 } from "react-icons/bs";
 import './NavBar.css'
+import useCart from "../../../hooks/useCart";
 
 const NavBar = () => {
   const { user, setUser, logoutUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const {cart}=useCart()
   // console.log(user?.displayName);
 
   const handleLogout = () => {
@@ -55,11 +57,10 @@ const NavBar = () => {
         </button> */}
 
         <Link to="/menu" className="flex items-center uppercase">
-          
           Our menu
           <div className=" text-lg">
             <BsCart4 className="badge rounded-full text-lg"/> 
-            <sub className="absolute right-0 bottom-1 badge rounded-full bg-red-500 p-2">1</sub>
+            <sub className="absolute right-0 bottom-1 badge rounded-full bg-red-500 p-2">{cart.length}</sub>
           </div>
           
         </Link>

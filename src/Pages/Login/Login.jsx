@@ -14,9 +14,13 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../providers/AuthProvider/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { auth } from "../../providers/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const { loginUser, passResetEmailLink } = useContext(AuthContext);
+  // const {email,emailVerified}=auth
+  const { user, loginUser, passResetEmailLink, verifyEmailLink } =
+    useContext(AuthContext);
   // console.log(name);
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,20 +52,29 @@ const Login = () => {
       console.log("Captcha Matched");
 
       // log in process initiate
+
       loginUser(email, password)
         .then((result) => {
-          toast("User logged in!");
-          // console.log("user LOGGEDIN=>",result.user);
-          // clear the form
-          form.reset();
-          // redirect
-          navigate(goTo);
+          console.log(result.user);
+          if (result.user.emailVerified) {
+            toast("User logged in!");
+            // console.log("user LOGGEDIN=>",result.user);
+            // clear the form
+
+            form.reset();
+            // redirect
+            console.log("goto=>>", goTo);
+            navigate(goTo);
+          } else {
+            toast("Please verify your email!");
+          }
         })
         .catch((err) => {
           toast(`Error code=${err.code}`);
-          // console.log(err.code, err.msg);
+          console.log(err.code, err.msg);
         });
     } else {
+      toast("Captcha did not match. Try again!");
       console.log("Captcha Does Not Match");
     }
   };
@@ -81,6 +94,22 @@ const Login = () => {
     toast(`Password reset link sent to ${forgotEmail}`);
     setModalOpen(false);
   };
+
+  const handleEmailVerification = () => {
+    if (forgotEmail) {
+      verifyEmailLink(forgotEmail)
+        .then(() => {
+          toast(`Email verification link sent to ${forgotEmail}`);
+        })
+        .catch((error) => {
+          console.log("Error=>", error);
+        });
+    }
+
+    toast(`Password reset link sent to ${forgotEmail}`);
+    setModalOpen(false);
+  };
+
   return (
     <>
       <title>Bistro Boss | Login</title>
@@ -179,7 +208,7 @@ const Login = () => {
                   }
                   className="font-semibold"
                 >
-                  Forgot password?
+                  Forgot password or need to verify email?
                 </button>
               </p>
 
@@ -203,9 +232,11 @@ const Login = () => {
             {/* Modal */}
             <dialog id="forgotModal" className="modal">
               <div className="modal-box">
-                <h3 className="font-bold text-lg">Reset Password</h3>
+                <h3 className="font-bold text-lg">
+                  Reset Account Password or Verify Email
+                </h3>
                 <p className="py-2 text-sm text-gray-600">
-                  Enter your email to reset your password.
+                  Enter your email to reset your password or verify email.
                 </p>
 
                 <input
@@ -224,7 +255,17 @@ const Login = () => {
                     document.getElementById("forgotModal").close();
                   }}
                 >
-                  Send Reset Link
+                  Send Password Reset Link
+                </button>
+
+                <button
+                  className="w-full bg-blue-500 text-white py-2 rounded mt-4"
+                  onClick={() => {
+                    handleEmailVerification();
+                    document.getElementById("forgotModal").close();
+                  }}
+                >
+                  Send Email Verification Link
                 </button>
 
                 <form method="dialog">

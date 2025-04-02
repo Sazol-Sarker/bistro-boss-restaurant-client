@@ -11,13 +11,20 @@ import {
 } from "firebase/auth";
 import app from "./../../firebase/firebase.init";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-const auth = getAuth(app);
-
+export const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // const currentPath = window.location.pathname;
+  // const inLoginPath = currentPath.includes("/login");
+  // console.log("window.location.pathname=>",window.location.pathname,inLoginPath);
+
   // FIREBASE CLIENT SDks
   // create user
   const registerUser = (email, password) => {
@@ -37,13 +44,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser?.emailVerified) {
-        const uid = currentUser.uid;
+      if (currentUser.emailVerified) {
+        // const uid = currentUser.uid;
         setUser(currentUser);
         setLoading(false);
         // console.log(uid);
-      }
-      // console.log("On auth=>", currentUser);
+      } 
+      // else {
+        
+      //   // toast("Email not verified! Check inbox or spam to verify.");
+      // }
+      console.log("On auth=>", currentUser);
     });
 
     return () => {
@@ -53,6 +64,7 @@ const AuthProvider = ({ children }) => {
 
   //   Update a user's profile
   const updateUserProfile = (name) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       // photoURL: photoUrl,
@@ -66,16 +78,17 @@ const AuthProvider = ({ children }) => {
   };
 
   // Email verification mail send
-  const verifyEmailLink = () => {
+  const verifyEmailLink = (email) => {
     setLoading(true);
-    return sendEmailVerification(auth.currentUser);
+    return sendEmailVerification(email);
+    // return sendEmailVerification(auth.currentUser);
   };
   // password Reset Email Link
 
   const passResetEmailLink = (email) => {
     setLoading(true);
 
-    return sendPasswordResetEmail(auth,email);
+    return sendPasswordResetEmail(auth, email);
   };
   const authInfo = {
     name: "sazol",
