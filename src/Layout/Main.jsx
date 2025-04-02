@@ -6,16 +6,16 @@ import NavBar from "./../Pages/Shared/NavBar/NavBar";
 const Main = () => {
   const location=useLocation()
   // console.log("Location=>",location);
-  const isLoginPage=location.pathname.includes("/login")
+  const noHeaderFooter=location.pathname.includes("/login") || location.pathname.includes('/register')
   return (
     <div>
       <title>Bistro Boss | Home Page</title>
       {/* <h2>Main layout</h2> */}
-      {isLoginPage||<NavBar></NavBar>}
+      {noHeaderFooter||<NavBar></NavBar>}
       
       <Outlet></Outlet>
       
-      {isLoginPage||<Footer></Footer>}
+      {noHeaderFooter||<Footer></Footer>}
       
     </div>
   );

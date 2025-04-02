@@ -1,8 +1,29 @@
-import { Link } from "react-router-dom";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { Link, useNavigate } from "react-router-dom";
 import userLogo from "../../../assets/home/user.png";
-import navbarLogo from '../../../assets/navbarLogo.png'
+import navbarLogo from "../../../assets/navbarLogo.png";
+import { useContext } from "react";
+import AuthContext from "../../../providers/AuthProvider/AuthContext";
+import { toast } from "react-toastify";
+import { BsCart4 } from "react-icons/bs";
+import './NavBar.css'
+
 const NavBar = () => {
+  const { user, setUser, logoutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  // console.log(user?.displayName);
+
+  const handleLogout = () => {
+    logoutUser()
+      .then(() => {
+        toast("Logout successfull!");
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    navigate("/");
+  };
+
   const links = (
     <>
       <li>
@@ -11,20 +32,36 @@ const NavBar = () => {
       <li>
         <Link to="/contact">CONTACT US</Link>
       </li>
-      <li>
-        <Link to="/login">LOG IN</Link>
-      </li>
-      <li>
+
+      {!user && (
+        <li>
+          <Link to="/register">REGISTER</Link>
+        </li>
+      )}
+
+      {/* <li>
         <Link to="/dashboard">DASHBOARD</Link>
-      </li>
+      </li> */}
+
+      {user && (
+        <li>
+          <Link to="/dashboard">DASHBOARD</Link>
+        </li>
+      )}
       <li>
+        {/* <button className="btn">
+          Inbox
+          <div className="badge">+99</div>
+        </button> */}
+
         <Link to="/menu" className="flex items-center uppercase">
-          <p>Our menu</p>
-          <img
-            className="w-5"
-            src="https://img.icons8.com/?size=80&id=23072&format=png"
-            alt=""
-          />
+          
+          Our menu
+          <div className=" text-lg">
+            <BsCart4 className="badge rounded-full text-lg"/> 
+            <sub className="absolute right-0 bottom-1 badge rounded-full bg-red-500 p-2">1</sub>
+          </div>
+          
         </Link>
       </li>
       <li>
@@ -33,15 +70,29 @@ const NavBar = () => {
           <p>Order food</p>
         </Link>
       </li>
-      <Link to="" className="flex items-center">
-        <p>SIGNOUT</p>
-
-        <img
-          className=" ml-2 w-8 border-2 rounded-full"
-          src={userLogo}
-          alt=""
-        />
-      </Link>
+      {user ? (
+        <Link
+          to="/"
+          onClick={handleLogout}
+          className="flex  ml-10 items-center gap-x-2"
+        >
+          <div className="flex flex-col items-center">
+            <img
+              className=" ml-2 w-5 border-2 rounded-full"
+              src={userLogo}
+              alt="logout"
+            />
+            <p>{user?.displayName}</p>
+          </div>
+          <div>
+            <p>SIGNOUT</p>
+          </div>
+        </Link>
+      ) : (
+        <li>
+          <Link to="/login">LOG IN</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -71,7 +122,7 @@ const NavBar = () => {
             {links}
           </ul>
         </div>
-        <Link to="" className="btn btn-ghost text-lg md:text-3xl">
+        <Link to="/" className="btn btn-ghost text-lg md:text-3xl">
           {/* Bistro Boss */}
           <img src={navbarLogo} alt="navbarLogo" className="w-40 md:w-52" />
         </Link>

@@ -10,15 +10,23 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../providers/AuthProvider/AuthContext";
-import { Link } from 'react-router-dom';
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { loginUser, passResetEmailLink } = useContext(AuthContext);
+  // console.log(name);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const {name}=useContext(AuthContext)
-  console.log(name);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // console.log("Location in Login=>", location);
+  // const goTo=location?.state?.from?.pathname;
+  const goTo = location?.state?.from?.pathname || "/dashboard";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -40,15 +48,38 @@ const Login = () => {
       console.log("Captcha Matched");
 
       // log in process initiate
-
-
-      // clear the form
-      form.reset()
+      loginUser(email, password)
+        .then((result) => {
+          toast("User logged in!");
+          // console.log("user LOGGEDIN=>",result.user);
+          // clear the form
+          form.reset();
+          // redirect
+          navigate(goTo);
+        })
+        .catch((err) => {
+          toast(`Error code=${err.code}`);
+          // console.log(err.code, err.msg);
+        });
     } else {
       console.log("Captcha Does Not Match");
     }
+  };
 
-    
+  const handleForgotPassword = () => {
+    // Handle password reset (e.g., Firebase Password Reset)
+    if (forgotEmail) {
+      passResetEmailLink(forgotEmail)
+        .then(() => {
+          toast(`Password reset email sent to ${forgotEmail}`);
+        })
+        .catch((error) => {
+          console.log("Error=>", error);
+        });
+    }
+
+    toast(`Password reset link sent to ${forgotEmail}`);
+    setModalOpen(false);
   };
   return (
     <>
@@ -136,20 +167,73 @@ const Login = () => {
                   Create a New Account
                 </Link>
               </p>
+              {/* <p className="text-center text-[#af1a94] text-sm mt-4">
+                <Link to="" onClick={() => setModalOpen(true)} className=" font-semibold">
+                  Forgot password?
+                </Link>
+              </p> */}
+              <p className="text-center text-[#af1a94] text-sm mt-4">
+                <button
+                  onClick={() =>
+                    document.getElementById("forgotModal").showModal()
+                  }
+                  className="font-semibold"
+                >
+                  Forgot password?
+                </button>
+              </p>
 
               {/* Social Login */}
               <div className="text-center mt-4">
                 <p>Or sign in with</p>
                 <div className="flex justify-center space-x-6 mt-2">
-                  <button className="btn btn-circle btn-outline"><FaFacebookF />
+                  <button className="btn btn-circle btn-outline">
+                    <FaFacebookF />
                   </button>
-                  <button className="btn btn-circle btn-outline"><FaGoogle />
+                  <button className="btn btn-circle btn-outline">
+                    <FaGoogle />
                   </button>
-                  <button className="btn btn-circle btn-outline"><FaGithub />
+                  <button className="btn btn-circle btn-outline">
+                    <FaGithub />
                   </button>
                 </div>
               </div>
             </form>
+
+            {/* Modal */}
+            <dialog id="forgotModal" className="modal">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">Reset Password</h3>
+                <p className="py-2 text-sm text-gray-600">
+                  Enter your email to reset your password.
+                </p>
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full p-2 border rounded mt-2"
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  required
+                />
+
+                <button
+                  className="w-full bg-blue-500 text-white py-2 rounded mt-4"
+                  onClick={() => {
+                    handleForgotPassword();
+                    document.getElementById("forgotModal").close();
+                  }}
+                >
+                  Send Reset Link
+                </button>
+
+                <form method="dialog">
+                  <button className="mt-2 w-full bg-gray-300 text-black py-2 rounded">
+                    Cancel
+                  </button>
+                </form>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>
