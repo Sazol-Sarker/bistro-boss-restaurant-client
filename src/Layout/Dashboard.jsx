@@ -1,0 +1,161 @@
+import { NavLink, Outlet } from "react-router-dom";
+import { IoHome } from "react-icons/io5";
+import { SlCalender } from "react-icons/sl";
+import { FaWallet } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdReviews } from "react-icons/md";
+import { FcRating } from "react-icons/fc";
+import { IoOptionsOutline } from "react-icons/io5";
+import { FaBagShopping } from "react-icons/fa6";
+import { IoMail } from "react-icons/io5";
+import useCart from "../hooks/useCart";
+import AuthContext from "../providers/AuthProvider/AuthContext";
+import { useEffect, useState } from "react";
+
+const Dashboard = () => {
+  const { cart } = useCart();
+  const [dynamicNavLinks, setDynamicNavLinks] = useState(null);
+
+  // admin decision
+  // const isAdmin = false;
+  const isAdmin = true;
+  const adminNavLinks = (
+    <>
+      <ul>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <IoHome className="text-red-500 text-lg" />
+            admin home
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <SlCalender />
+            add items
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <FaWallet />
+            manage items
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="/dashboard/cart">
+            <FaShoppingCart />
+            manage bookings
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="/dashboard/allUsers">
+            <MdReviews className="text-lg" />
+            all users
+          </NavLink>
+        </li>
+        {/* <li className="menu uppercase">
+          <NavLink to="">
+            <FcRating />
+            my booking
+          </NavLink>
+        </li> */}
+      </ul>
+    </>
+  );
+
+  const userNavLinks = (
+    <>
+      <ul>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <IoHome className="text-red-500 text-lg" />
+            user home
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <SlCalender />
+            reservation
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <FaWallet />
+            payment history
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="/dashboard/cart">
+            <FaShoppingCart />
+            my cart <span className="font-bold">({cart.length})</span>
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <MdReviews className="text-lg" />
+            add review
+          </NavLink>
+        </li>
+        <li className="menu uppercase">
+          <NavLink to="">
+            <FcRating />
+            my booking
+          </NavLink>
+        </li>
+      </ul>
+    </>
+  );
+
+  useEffect(() => {
+    if (isAdmin) setDynamicNavLinks(adminNavLinks);
+    else setDynamicNavLinks(userNavLinks);
+  }, [isAdmin]);
+
+  return (
+    <>
+      <title>Bistro Boss | Dashboard</title>
+      {/*left sided drawer */}
+      <div className="w-full flex items-start gap-x-5 border-2 border-blue-300">
+        <div className="bg-[#D1A054] w-64 min-h-screen px-2">
+          <div className="left-0">{dynamicNavLinks}</div>
+          {/* <div className="left-0">{isAdmin ? adminNavLinks : userNavLinks}</div> */}
+          <div className="divider"></div>
+          {/* shared navbar */}
+          <div>
+            <ul>
+              <li className="menu uppercase">
+                <NavLink to="/">
+                  <IoHome className="text-red-500 text-lg" />
+                  home
+                </NavLink>
+              </li>
+              <li className="menu uppercase">
+                <NavLink to="/menu">
+                  <IoOptionsOutline />
+                  menu
+                </NavLink>
+              </li>
+              <li className="menu uppercase">
+                <NavLink to="/order/offered">
+                  <FaBagShopping />
+                  order food
+                </NavLink>
+              </li>
+              <li className="menu uppercase">
+                <NavLink to="/contact">
+                  <IoMail />
+                  contact
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {/* right div */}
+        <div className="w-full border-2 border-white">
+          <Outlet></Outlet>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Dashboard;

@@ -8,12 +8,12 @@ const PrivateRoutes = ({ children }) => {
   // console.log("Private route location=>>", location);
 
   if (loading) {
-    <>
+   return <div className="flex items-center justify-center">
       <span className="loading loading-dots loading-xs"></span>
       <span className="loading loading-dots loading-sm"></span>
       <span className="loading loading-dots loading-md"></span>
       <span className="loading loading-dots loading-lg"></span>
-    </>;
+    </div>;
   }
 
   if (user) return children;

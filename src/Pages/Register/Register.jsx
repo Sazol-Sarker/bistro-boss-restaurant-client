@@ -1,15 +1,20 @@
 import registerBannerImg from "../../assets/others/authentication1.png";
 import registerBg from "../../assets/others/authentication.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FaFacebookF } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa6";
-import { useContext } from "react";
+
+import { useContext, useState } from "react";
 import AuthContext from "../../providers/AuthProvider/AuthContext";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import axios from "axios";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa6";
+
 const Register = () => {
-  const { registerUser, updateUserProfile,verifyEmailLink } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const { registerUser, updateUserProfile, verifyEmailLink } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -18,6 +23,9 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  // TODO: update later how to assign role
+//  const isAdmin=true
+const role="admin"
   // const handleRegisterForm = (e) => {
   //   // stop reload
   //   e.preventDefault();
@@ -52,13 +60,21 @@ const Register = () => {
         // console.log("Register=>", result.user);
         toast("User created!");
 
+        // POST API
+        const newUser = { name, email,role };
+        axios.post("http://localhost:5000/users", newUser).then((res) => {
+          console.log("DB response, user create=>", res.data);
+          if (res.data.insertedId)
+            toast(`New user ${email} created in DB, welcome!`);
+        });
+
         // update user profile
         updateUserProfile(
           name
           // photoURL: "https://example.com/jane-q-user/profile.jpg",
         )
           .then(() => {
-            toast('Profile updated')
+            toast("Profile updated");
             // console.log("Profile updated");
           })
           .catch((error) => {
@@ -67,12 +83,12 @@ const Register = () => {
 
         // verify user email
         verifyEmailLink()
-        .then(()=>{
-            toast(`Verification link sent to ${email} `)
-        })
-        .catch(error=>{
-          console.log(error);
-        })
+          .then(() => {
+            toast(`Verification link sent to ${email} `);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
         // reset form
         reset();
@@ -160,33 +176,47 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text font-bold">Password</span>
                 </label>
-                <input
-                  type="password"
-                  name="password"
-                  {...register("password", {
-                    required: {
-                      value: true,
-                      message: "Password is required.",
-                    },
-                    minLength: {
-                      value: 6,
-                      message: "Password length must be greater equal 6.",
-                    },
-                    maxLength: {
-                      value: 30,
-                      message: "Password length must be less equal 20.",
-                    },
-                    pattern: {
-                      value:
-                        /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-                      message:
-                        "Password must contain at least a lowercase, an uppercase, a digit and a special character!",
-                    },
-                  })}
-                  placeholder="Enter your password"
-                  className="input input-bordered w-full"
-                  // required
-                />
+                <div className="relative">
+                  <input
+                    type={!showPassword ?"password":"text"}
+                    name="password"
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is required.",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Password length must be greater equal 6.",
+                      },
+                      maxLength: {
+                        value: 30,
+                        message: "Password length must be less equal 20.",
+                      },
+                      pattern: {
+                        value:
+                          /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+                        message:
+                          "Password must contain at least a lowercase, an uppercase, a digit and a special character!",
+                      },
+                    })}
+                    placeholder="Enter your password"
+                    className="input input-bordered w-full"
+                    // required
+                  />
+                  {!showPassword ? (
+                    <FaRegEye
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 cursor-pointer -translate-y-1/2 text-xl"
+                    />
+                  ) : (
+                    <FaRegEyeSlash
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3  top-1/2 cursor-pointer -translate-y-1/2 text-xl"
+                    />
+                  )}
+                </div>
+
                 {errors.password && (
                   <p className="text-red-500">{errors.password.message}</p>
                 )}
@@ -206,20 +236,9 @@ const Register = () => {
               </p>
 
               {/* Social Login */}
-              <div className="text-center mt-4">
-                <p>Or sign up with</p>
-                <div className="flex justify-center space-x-6 mt-2">
-                  <button className="btn btn-circle btn-outline">
-                    <FaFacebookF />
-                  </button>
-                  <button className="btn btn-circle btn-outline">
-                    <FaGoogle />
-                  </button>
-                  <button className="btn btn-circle btn-outline">
-                    <FaGithub />
-                  </button>
-                </div>
-              </div>
+              <div className="divider"></div>
+
+              <SocialLogin></SocialLogin>
             </form>
           </div>
           {/* Left side: Image */}

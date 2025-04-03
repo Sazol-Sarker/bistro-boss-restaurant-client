@@ -6,6 +6,7 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -14,15 +15,21 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider,GithubAuthProvider  } from "firebase/auth";
+
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 export const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isGithubLogin,setIsGithubLogin]=useState(false)
 
   // const currentPath = window.location.pathname;
-  // const inLoginPath = currentPath.includes("/login");
+  // const inLoginPath = currentPath.includes("/social");
   // console.log("window.location.pathname=>",window.location.pathname,inLoginPath);
 
   // FIREBASE CLIENT SDks
@@ -44,10 +51,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser.emailVerified) {
+      if (currentUser.emailVerified||isGithubLogin) {
         // const uid = currentUser.uid;
         setUser(currentUser);
         setLoading(false);
+        setIsGithubLogin(false)
         // console.log(uid);
       } 
       // else {
@@ -60,7 +68,9 @@ const AuthProvider = ({ children }) => {
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [isGithubLogin]);
+
+
 
   //   Update a user's profile
   const updateUserProfile = (name) => {
@@ -78,10 +88,10 @@ const AuthProvider = ({ children }) => {
   };
 
   // Email verification mail send
-  const verifyEmailLink = (email) => {
+  const verifyEmailLink = () => {
     setLoading(true);
-    return sendEmailVerification(email);
-    // return sendEmailVerification(auth.currentUser);
+    // return sendEmailVerification(email);
+    return sendEmailVerification(auth.currentUser);
   };
   // password Reset Email Link
 
@@ -90,6 +100,20 @@ const AuthProvider = ({ children }) => {
 
     return sendPasswordResetEmail(auth, email);
   };
+
+  // 3rd party: GOOGLE LOG IN
+
+  const googleSignIn=()=>{
+    setLoading(true)
+    return signInWithPopup(auth,googleProvider)
+  }
+  // 3rd party: github Login
+const githubLogin=()=>{
+  setLoading(true)
+  setIsGithubLogin(true)
+  return signInWithPopup(auth,githubProvider)
+}
+
   const authInfo = {
     name: "sazol",
     user,
@@ -102,6 +126,8 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     passResetEmailLink,
     verifyEmailLink,
+    googleSignIn,
+    githubLogin
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

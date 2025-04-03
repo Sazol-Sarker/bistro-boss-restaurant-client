@@ -14,8 +14,9 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../providers/AuthProvider/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-import { auth } from "../../providers/AuthProvider/AuthProvider";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+// import Swal from "sweetalert2";
+// import { auth } from "../../providers/AuthProvider/AuthProvider";
 
 const Login = () => {
   // const {email,emailVerified}=auth
@@ -213,7 +214,7 @@ const Login = () => {
               </p>
 
               {/* Social Login */}
-              <div className="text-center mt-4">
+              {/* <div className="text-center mt-4">
                 <p>Or sign in with</p>
                 <div className="flex justify-center space-x-6 mt-2">
                   <button className="btn btn-circle btn-outline">
@@ -226,7 +227,9 @@ const Login = () => {
                     <FaGithub />
                   </button>
                 </div>
-              </div>
+              </div> */}
+              <div className="divider"></div>
+              <SocialLogin></SocialLogin>
             </form>
 
             {/* Modal */}
