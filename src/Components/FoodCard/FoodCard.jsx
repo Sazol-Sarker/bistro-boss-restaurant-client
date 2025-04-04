@@ -17,7 +17,7 @@ const FoodCard = ({ item }) => {
  
 
   const handleAddToCart = (item) => {
-    console.log(item);
+    // console.log(item);
 
     if (user && user.email) {
       // insert a carts item (itemId,userEmail,ItemName,ItemImage,price)
@@ -34,7 +34,7 @@ const FoodCard = ({ item }) => {
 
           toast(`${name} added to cart!`);
           refetch()
-          console.log(res.data);
+          // console.log(res.data);
         }
       });
     } else {

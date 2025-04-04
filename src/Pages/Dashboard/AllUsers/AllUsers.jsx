@@ -17,13 +17,15 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/users",{headers:{
+        authorization:`Bearer ${localStorage.getItem('access-token')}`
+      }});
       //   console.log(res.data);
       return res.data;
     },
   });
 
-//   console.log("users=>", users);
+  //   console.log("users=>", users);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -66,7 +68,7 @@ const AllUsers = () => {
 
   return (
     <div className="w-full border-2 border-teal-500">
-      <div className="text-2xl font-bold uppercase flex items-center justify-center">
+      <div className="text-2xl font-bold uppercase flex items-center justify-center mb-5">
         total users: {users.length}
       </div>
 
@@ -76,12 +78,12 @@ const AllUsers = () => {
           <table className="table table-zebra">
             {/* head */}
             <thead>
-              <tr className="text-md uppercase text-center">
-                <th >#</th>
+              <tr className="text-md uppercase text-center bg-[#D1A054] text-white">
+                <th className="border-tl-2 rounded-tl-md">#</th>
                 <th>Name</th>
-                <th >Email</th>
-                <th >roll</th>
-                <th >action</th>
+                <th>Email</th>
+                <th>roll</th>
+                <th className="border-tr-2 rounded-tr-md">action</th>
               </tr>
             </thead>
             <tbody className="text-center">
@@ -93,31 +95,37 @@ const AllUsers = () => {
                   <td>
                     {user?.role == "admin" ? (
                       <div className="cursor-pointer flex flex-col items-center">
-                        <FaUserSecret
-                          onClick={() => handleUserRoleUpdate(user._id, "user")}
-                          className="text-lg "
-                        />
+                        <button className="px-2 py-1 bg-[#D1A054] w-10 flex flex-col items-center rounded-md ">
+                          <FaUserSecret
+                            onClick={() =>
+                              handleUserRoleUpdate(user._id, "user")
+                            }
+                            className="text-lg "
+                          />
 
-                        <span>{user?.role}</span>
+                          <span>{user?.role}</span>
+                        </button>
                       </div>
                     ) : (
                       <div className="cursor-pointer flex flex-col items-center">
-                        <FaUsers
-                          onClick={() =>
-                            handleUserRoleUpdate(user._id, "admin")
-                          }
-                          className="text-lg cursor-pointer"
-                        />
-                        <span>{user?.role}</span>
+                        <button className="px-2 py-1 bg-[#D1A054] w-10 text-white flex flex-col items-center rounded-md ">
+                          <FaUsers
+                            onClick={() =>
+                              handleUserRoleUpdate(user._id, "admin")
+                            }
+                            className="text-lg  cursor-pointer"
+                          />
+                          <span>{user?.role}</span>
+                        </button>
                       </div>
                     )}
                   </td>
                   <td>
                     <button
                       onClick={() => handleUserDelete(user._id)}
-                      className="bg-red-500 p-2 rounded-lg"
+                      className="bg-[#B91C1C] p-2 rounded-lg"
                     >
-                      <FaRegTrashCan />
+                      <FaRegTrashCan className="text-white" />
                     </button>
                   </td>
                 </tr>

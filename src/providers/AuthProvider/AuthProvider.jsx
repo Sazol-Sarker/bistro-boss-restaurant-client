@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { GoogleAuthProvider,GithubAuthProvider  } from "firebase/auth";
-
+import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
@@ -26,8 +26,8 @@ export const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isGithubLogin,setIsGithubLogin]=useState(false)
-
+  const [isGithubLogin, setIsGithubLogin] = useState(false);
+  const axiosPublic = useAxiosPublic();
   // const currentPath = window.location.pathname;
   // const inLoginPath = currentPath.includes("/social");
   // console.log("window.location.pathname=>",window.location.pathname,inLoginPath);
@@ -51,26 +51,41 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser.emailVerified||isGithubLogin) {
-        // const uid = currentUser.uid;
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        // get+store jwt token -> localstorage
+        axiosPublic
+          .post("/jwt", userInfo)
+          .then((res) => {
+            // console.log("JWT AUTH=>", res.data);
+            if (res.data.token) {
+              localStorage.setItem("access-token", res.data.token);
+            }
+          })
+          .catch((error) => {
+            // console.log("JWT AUTH error=>", error);
+          });
+      } 
+      else {
+        localStorage.removeItem("access-token");
+
+        // toast("Email not verified! Check inbox or spam to verify.");
+      }
+
+      if (currentUser.emailVerified || isGithubLogin) {
         setUser(currentUser);
         setLoading(false);
-        setIsGithubLogin(false)
+        setIsGithubLogin(false);
         // console.log(uid);
-      } 
-      // else {
-        
-      //   // toast("Email not verified! Check inbox or spam to verify.");
-      // }
+      }
+
       console.log("On auth=>", currentUser);
     });
 
     return () => {
       return unsubscribe();
     };
-  }, [isGithubLogin]);
-
-
+  }, [isGithubLogin, axiosPublic]);
 
   //   Update a user's profile
   const updateUserProfile = (name) => {
@@ -103,16 +118,16 @@ const AuthProvider = ({ children }) => {
 
   // 3rd party: GOOGLE LOG IN
 
-  const googleSignIn=()=>{
-    setLoading(true)
-    return signInWithPopup(auth,googleProvider)
-  }
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
   // 3rd party: github Login
-const githubLogin=()=>{
-  setLoading(true)
-  setIsGithubLogin(true)
-  return signInWithPopup(auth,githubProvider)
-}
+  const githubLogin = () => {
+    setLoading(true);
+    setIsGithubLogin(true);
+    return signInWithPopup(auth, githubProvider);
+  };
 
   const authInfo = {
     name: "sazol",
@@ -127,7 +142,7 @@ const githubLogin=()=>{
     passResetEmailLink,
     verifyEmailLink,
     googleSignIn,
-    githubLogin
+    githubLogin,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

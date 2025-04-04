@@ -63,7 +63,7 @@ const role="admin"
         // POST API
         const newUser = { name, email,role };
         axios.post("http://localhost:5000/users", newUser).then((res) => {
-          console.log("DB response, user create=>", res.data);
+          // console.log("DB response, user create=>", res.data);
           if (res.data.insertedId)
             toast(`New user ${email} created in DB, welcome!`);
         });

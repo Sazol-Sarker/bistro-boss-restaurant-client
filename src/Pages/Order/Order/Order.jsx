@@ -30,7 +30,7 @@ const Order = () => {
   // Find the index of the category from the URL
   const defaultIndex =
     categories.indexOf(category) !== -1 ? categories.indexOf(category) : 0;
-  console.log();
+  // console.log();
   const [tabIndex, setTabIndex] = useState(defaultIndex);
 
   useEffect(() => {

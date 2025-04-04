@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const SocialLogin = () => {
   const { googleSignIn, githubLogin } = useContext(AuthContext);
   const { user, setLoading } = useContext(AuthContext);
-  console.log("user in social=>",user);
+  // console.log("user in social=>",user);
   const navigate = useNavigate();
 
   const handleGoogleLogIn = () => {
@@ -18,14 +18,14 @@ const SocialLogin = () => {
         if (result.user.emailVerified) {
           if (user) {
             toast("Login successful via google!");
-            console.log("Google Sign In=>", result.user);
+            // console.log("Google Sign In=>", result.user);
             setLoading(false);
             navigate("/dashboard");
           }
         }
       })
       .catch((error) => {
-        console.log("Google sign in error=>", error);
+        // console.log("Google sign in error=>", error);
       });
   };
 
@@ -34,13 +34,13 @@ const SocialLogin = () => {
       .then((result) => {
         
           toast("Login successful via github!");
-          console.log("Google Sign In=>", result.user);
+          // console.log("Google Sign In=>", result.user);
           setLoading(false);
           navigate("/dashboard");
         
       })
       .catch((error) => {
-        console.log("Google sign in error=>", error);
+        // console.log("Google sign in error=>", error);
       });
   };
 

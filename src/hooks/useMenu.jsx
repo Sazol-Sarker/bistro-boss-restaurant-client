@@ -14,7 +14,7 @@ const useMenu = () => {
         setLoading(false)
       })
       .catch((error) => {
-        console.error("Error fetching menu:", error);
+        // console.error("Error fetching menu:", error);
         setLoading(false);
       });
     }, []);

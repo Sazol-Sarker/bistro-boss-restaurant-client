@@ -14,9 +14,9 @@ const useCart = () => {
       return res.data;
     },
   });
-  if (isLoading) {
-    return { cart: [], isLoading: true };
-  }
+  // if (isLoading) {
+  //   return { cart: [], isLoading: true };
+  // }
   
 
   return { cart ,refetch, isLoading};

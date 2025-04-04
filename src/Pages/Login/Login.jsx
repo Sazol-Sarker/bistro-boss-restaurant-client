@@ -64,7 +64,7 @@ const Login = () => {
 
             form.reset();
             // redirect
-            console.log("goto=>>", goTo);
+            // console.log("goto=>>", goTo);
             navigate(goTo);
           } else {
             toast("Please verify your email!");
@@ -72,11 +72,11 @@ const Login = () => {
         })
         .catch((err) => {
           toast(`Error code=${err.code}`);
-          console.log(err.code, err.msg);
+          // console.log(err.code, err.msg);
         });
     } else {
       toast("Captcha did not match. Try again!");
-      console.log("Captcha Does Not Match");
+      // console.log("Captcha Does Not Match");
     }
   };
 
