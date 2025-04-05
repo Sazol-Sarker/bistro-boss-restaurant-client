@@ -39,7 +39,7 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/manageItems">
             <FaWallet />
             manage items
           </NavLink>

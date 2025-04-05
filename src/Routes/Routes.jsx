@@ -13,6 +13,8 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoutes from './AdminRoutes';
 import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
+import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -53,9 +55,7 @@ const router = createBrowserRouter([
   {
     path:'/dashboard',
     errorElement:<ErrorPage></ErrorPage>,
-    element:<PrivateRoutes>
-    <Dashboard></Dashboard>
-  </PrivateRoutes>,
+    element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
   children:[
     // normal user routes
     {
@@ -73,6 +73,15 @@ const router = createBrowserRouter([
       path:'addItems',
       element:<AdminRoutes><AddItems></AddItems></AdminRoutes>
     },
+    {
+      path:'manageItems',
+      element:<AdminRoutes><ManageItems></ManageItems></AdminRoutes>
+    },
+    {
+      path:'updateItem/:id',
+      element:<UpdateItem></UpdateItem>,
+      loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+    }
     // {
     //   path:'userHome',
     //   element:<userHome></userHome>
