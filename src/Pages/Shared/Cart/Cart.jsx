@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const Cart = () => {
   const { cart, refetch } = useCart();
   // console.log("cart in cart.jsx=>", cart);
+  console.log("cart.length in cart.jsx=>", cart.length);
   const axiosSecure = useAxiosSecure();
 
   const totalOrders = cart.length;
@@ -14,8 +15,10 @@ const Cart = () => {
     
     // delete api: cart
     axiosSecure.delete(`carts/${id}`).then((res) => {
-      // console.log("Deleting cart item=>", res.data);
+      console.log("Deleting cart item=>", res.data);
       refetch();
+    }).catch(error=>{
+      console.log("Error during cart item delete=>",error);
     });
   };
 

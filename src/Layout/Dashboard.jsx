@@ -11,14 +11,18 @@ import { IoMail } from "react-icons/io5";
 import useCart from "../hooks/useCart";
 import AuthContext from "../providers/AuthProvider/AuthContext";
 import { useEffect, useState } from "react";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const { cart } = useCart();
   const [dynamicNavLinks, setDynamicNavLinks] = useState(null);
+  
+  // console.log("cart.length in dashboard.jsx=>", cart.length);
 
   // admin decision
   // const isAdmin = false;
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  // console.log("isAdmin in dashboard=>",isAdmin);
   const adminNavLinks = (
     <>
       <ul>
@@ -29,7 +33,7 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/addItems">
             <SlCalender />
             add items
           </NavLink>
