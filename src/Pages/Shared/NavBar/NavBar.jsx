@@ -7,11 +7,13 @@ import { toast } from "react-toastify";
 import { BsCart4 } from "react-icons/bs";
 import './NavBar.css'
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
   const { user, setUser, logoutUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+   const [isAdmin] = useAdmin(); 
   const {cart}=useCart()
+  const navigate = useNavigate();
   // console.log(user?.displayName);
 
   const handleLogout = () => {
@@ -45,11 +47,15 @@ const NavBar = () => {
         <Link to="/dashboard">DASHBOARD</Link>
       </li> */}
 
-      {user && (
-        <li>
-          <Link to="/dashboard">DASHBOARD</Link>
+      {user?isAdmin? <li>
+          <Link to="/dashboard/adminHome">DASHBOARD</Link>
+        </li>:<li>
+          <Link to="/dashboard/userHome">DASHBOARD</Link>
+        </li>:<li>
+          <Link to="/dashboard/userHome">DASHBOARD</Link>
         </li>
-      )}
+        
+      }
       <li>
         {/* <button className="btn">
           Inbox

@@ -12,8 +12,10 @@ import useCart from "../hooks/useCart";
 import AuthContext from "../providers/AuthProvider/AuthContext";
 import { useEffect, useState } from "react";
 import useAdmin from "../hooks/useAdmin";
+import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
+  const {user}=useAuth()
   const { cart, isLoading } = useCart();
   const [isAdmin,isAdminLoading] = useAdmin();
   // if (isLoading || isAdminLoading) {
@@ -39,7 +41,7 @@ const Dashboard = () => {
     <>
       <ul>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/adminHome">
             <IoHome className="text-red-500 text-lg" />
             admin home
           </NavLink>
@@ -82,7 +84,7 @@ const Dashboard = () => {
     <>
       <ul>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/userHome">
             <IoHome className="text-red-500 text-lg" />
             user home
           </NavLink>

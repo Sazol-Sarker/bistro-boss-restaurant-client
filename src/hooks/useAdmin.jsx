@@ -3,13 +3,14 @@ import useAuth from "./useAuth";
 import useAxiosSecure from './useAxiosSecure';
 
 const useAdmin = () => {
-    const {user}=useAuth()
+    const {user,loading}=useAuth()
     const axiosSecure=useAxiosSecure()
 
     // tanstack query
     const {data:isAdmin,isPending:isAdminLoading}=useQuery({
        
        queryKey:['isAdmin',user?.email], 
+       enabled:!loading,
        queryFn:async()=>{
         const res=await axiosSecure(`/users/${user.email}`)
         // console.log("Admin role check in useAdmin=>",res.data);

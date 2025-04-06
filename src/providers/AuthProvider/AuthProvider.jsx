@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
             // console.log("JWT AUTH=>", res.data);
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
+              setLoading(false);//added later
             }
           })
           .catch((error) => {
@@ -68,6 +69,7 @@ const AuthProvider = ({ children }) => {
       } 
       else {
         localStorage.removeItem("access-token");
+        setLoading(false);//added later
 
         // toast("Email not verified! Check inbox or spam to verify.");
       }

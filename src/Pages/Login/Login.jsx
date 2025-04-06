@@ -31,7 +31,7 @@ const Login = () => {
 
   // console.log("Location in Login=>", location);
   // const goTo=location?.state?.from?.pathname;
-  const goTo = location?.state?.from?.pathname || "/dashboard";
+  const goTo = location?.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
