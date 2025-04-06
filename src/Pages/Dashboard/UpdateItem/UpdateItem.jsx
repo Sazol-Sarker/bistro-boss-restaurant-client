@@ -45,7 +45,7 @@ const UpdateItem = () => {
   return (
     <div>
       <h2 className="text-xl">UPDATE ITEM</h2>
-      <h2>{foodItem.name}</h2>
+      
       <div className="w-full border-2">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
           {/* form */}
@@ -130,6 +130,9 @@ const UpdateItem = () => {
             <button className="btn bg-[#D1A054] text-white my-5 p-2 w-3/9 ">
               Update Recipe Details
             </button>
+            {/* <button onClick={()=>navigate(-1)} className="btn bg-[#D1A054] text-white my-5 p-2 w-3/9 ">
+              Cancel
+            </button> */}
           </div>
         </form>
       </div>

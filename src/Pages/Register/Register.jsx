@@ -25,7 +25,7 @@ const Register = () => {
 
   // TODO: update later how to assign role
 //  const isAdmin=true
-const role="admin"
+const role="user"
   // const handleRegisterForm = (e) => {
   //   // stop reload
   //   e.preventDefault();

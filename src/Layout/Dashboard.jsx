@@ -14,15 +14,27 @@ import { useEffect, useState } from "react";
 import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const { cart } = useCart();
+  const { cart, isLoading } = useCart();
+  const [isAdmin,isAdminLoading] = useAdmin();
+  // if (isLoading || isAdminLoading) {
+  //   return (
+  //     <div className="flex items-center justify-center">
+  //       <span className="loading loading-dots loading-xs"></span>
+  //       <span className="loading loading-dots loading-sm"></span>
+  //       <span className="loading loading-dots loading-md"></span>
+  //       <span className="loading loading-dots loading-lg"></span>
+  //     </div>
+  //   );
+  // }
   const [dynamicNavLinks, setDynamicNavLinks] = useState(null);
-  
+
   // console.log("cart.length in dashboard.jsx=>", cart.length);
 
   // admin decision
   // const isAdmin = false;
-  const [isAdmin] = useAdmin();
   // console.log("isAdmin in dashboard=>",isAdmin);
+
+  
   const adminNavLinks = (
     <>
       <ul>

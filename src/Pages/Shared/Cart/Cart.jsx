@@ -1,6 +1,7 @@
 import { FaRegTrashCan } from "react-icons/fa6";
 import useCart from "./../../../hooks/useCart";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, refetch } = useCart();
@@ -27,9 +28,10 @@ const Cart = () => {
       <div className="uppercase w-full flex justify-evenly gap-x-5">
         <h2 className="text-2xl font-bold">Total orders: {totalOrders}</h2>
         <h2 className="text-2xl font-bold">Total price: ${totalPrice}</h2>
-        <button className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg">
+        
+        <Link to={"/dashboard/payment"}><button className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg">
           pay
-        </button>
+        </button></Link>
       </div>
       {/* cart items table */}
       {cart.length > 0 ? (

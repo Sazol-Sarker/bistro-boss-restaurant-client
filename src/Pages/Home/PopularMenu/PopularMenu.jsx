@@ -5,9 +5,9 @@ import useMenu from "./../../../hooks/useMenu";
 
 const PopularMenu = () => {
   const { menu, loading } = useMenu();
-  console.log(menu);
+  // console.log(menu);
   const popularMenu = menu.filter((item) => item.category === "popular");
-  console.log(popularMenu);
+  // console.log(popularMenu);
   // fetch menu items
   // useEffect(() => {
   //   axios.get("menu.json").then((res) => {
