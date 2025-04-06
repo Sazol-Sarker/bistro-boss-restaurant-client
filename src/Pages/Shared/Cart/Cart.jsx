@@ -6,21 +6,25 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { cart, refetch } = useCart();
   // console.log("cart in cart.jsx=>", cart);
-  console.log("cart.length in cart.jsx=>", cart.length);
+  // console.log("cart.length in cart.jsx=>", cart.length);
   const axiosSecure = useAxiosSecure();
 
   const totalOrders = cart.length;
-  const totalPrice = cart.reduce((sum, item) => sum + item.itemPrice, 0).toFixed(2);
+  const totalPrice = cart
+    .reduce((sum, item) => sum + item.itemPrice, 0)
+    .toFixed(2);
   //   console.log("totalOrders totalPrice=>", totalOrders, totalPrice);
   const handleCartItemDelete = (id) => {
-    
     // delete api: cart
-    axiosSecure.delete(`carts/${id}`).then((res) => {
-      console.log("Deleting cart item=>", res.data);
-      refetch();
-    }).catch(error=>{
-      console.log("Error during cart item delete=>",error);
-    });
+    axiosSecure
+      .delete(`carts/${id}`)
+      .then((res) => {
+        // console.log("Deleting cart item=>", res.data);
+        refetch();
+      })
+      .catch((error) => {
+        console.log("Error during cart item delete=>", error);
+      });
   };
 
   return (
@@ -28,10 +32,23 @@ const Cart = () => {
       <div className="uppercase w-full flex justify-evenly gap-x-5">
         <h2 className="text-2xl font-bold">Total orders: {totalOrders}</h2>
         <h2 className="text-2xl font-bold">Total price: ${totalPrice}</h2>
-        
-        <Link to={"/dashboard/payment"}><button className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg">
-          pay
-        </button></Link>
+
+        {
+          Number(totalPrice)>0?<Link to={"/dashboard/payment"}>
+          <button
+            
+            className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg"
+          >
+            pay
+          </button>
+        </Link>:
+        <button
+            disabled
+            className="text-xl opacity-30 text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg"
+          >
+            pay
+          </button>
+        }
       </div>
       {/* cart items table */}
       {cart.length > 0 ? (

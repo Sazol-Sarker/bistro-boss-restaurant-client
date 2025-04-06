@@ -9,16 +9,19 @@ import useAxiosSecure from "./../../../hooks/useAxiosSecure";
 import useCart from "./../../../hooks/useCart";
 import Payment from "./Payment";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosPublic from "./../../../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
+  const { cart, isLoading,refetch } = useCart();
+  const { user } = useAuth();
+  const navigate=useNavigate()
   const [errors, setErrors] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const [transactionId,setTransactionId]=useState('')
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const { cart, isLoading } = useCart();
-  const { user } = useAuth();
 
   const totalPrice = cart.reduce((total, item) => total + item.itemPrice, 0);
   // console.log("totalPrice===>", totalPrice);
@@ -68,7 +71,7 @@ const CheckoutForm = () => {
       // console.log("[error]", error);
     } else {
       setErrors("");
-      e.target.reset();
+      
       // console.log("[PaymentMethod]", paymentMethod);
     }
 
@@ -92,7 +95,39 @@ const CheckoutForm = () => {
       console.log("Confirm error=>", confirmError);
     } else {
       // console.log("PaymentIntent=>", paymentIntent);
+      if(paymentIntent.status==='succeeded')
+      {
+        // e.target.reset();
+        
+        console.log("Transaction id=>",paymentIntent.id);
+        setTransactionId(paymentIntent.id)
+
+        // now save payment in DB
+        const payment={
+          transactionId:paymentIntent.id,
+          email:user.email,
+          price:totalPrice.toFixed(2),
+          date:new Date(), //use moment js for covinient time zone issue resolve
+          cartIds:cart.map(item=>item._id),
+          menuItemIds:cart.map(item=>item.itemId),
+          status:"Pending"
+        }
+
+        const res=await axiosSecure.post('/payments',payment)
+        console.log("Db response : Payment post in DB-> API=>",res.data);
+        if(res?.data.paymentResult?.insertedId)
+        {
+          refetch()
+          toast(`Payment done with transaction id: ${paymentIntent.id}`)
+          navigate('/dashboard/paymentHistory')
+          
+        }
+        
+      }
     }
+
+
+
   };
 
   return (
@@ -120,11 +155,17 @@ const CheckoutForm = () => {
             disabled={!stripe || !clientSecret}
             className="btn bg-[#D1A054] mt-5 border-2 w-1/4 mx-auto"
           >
-            Pay <span>${totalPrice}</span>
+            Pay <span>${totalPrice.toFixed(2)}</span>
           </button>
         </form>
       </div>
-      <p className="text-red-500 text-center">{errors}</p>
+      {
+        errors&& <p className="text-red-500 text-center">{errors}</p>
+      }
+      {
+        transactionId&& <p className="text-green-500 text-center">Transaction id: {transactionId}</p>
+      }
+     
     </>
   );
 };

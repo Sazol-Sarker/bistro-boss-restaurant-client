@@ -88,13 +88,13 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/payment">
             <SlCalender />
             reservation
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/paymentHistory">
             <FaWallet />
             payment history
           </NavLink>
