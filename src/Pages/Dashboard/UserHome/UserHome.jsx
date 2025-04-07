@@ -76,7 +76,7 @@ const UserHome = () => {
 
       <div className="w-full flex mt-7 *:h-96">
         <div className="bg-[#D1A054]/80 mx-0 flex flex-col items-center justify-center text-2xl font-semibold  w-1/2">
-          <img src={profileLogo} alt="user" className="w-20 mb-2 rounded-full border-2" />
+          <img src={profileLogo} alt="user" className="w-20 mb-2 rounded-full border-2 border-[#D1A054]" />
           <h2 className="text-teal-700">
             {user?.displayName ? user.displayName : "Anonymous"}
           </h2>
