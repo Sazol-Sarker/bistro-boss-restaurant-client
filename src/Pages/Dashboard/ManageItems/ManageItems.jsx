@@ -5,6 +5,7 @@ import { FaTrash } from "react-icons/fa6";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageItems = () => {
   const { menu, loading, refetch } = useMenu();
@@ -15,14 +16,28 @@ const ManageItems = () => {
 
   // handleFoodItemDelete
   const handleFoodItemDelete = async (food) => {
-    // trigger delete api: food item
-    const res = await axiosSecure.delete(`/menu/${food._id}`);
+    // swal alert: delete confirmation
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-    if (res.data.deletedCount > 0) {
-      refetch();
-      toast(`${food.name} is deleted successfully!`);
-    } else {
-      console.log("Delete food item failed");
+    if (result.isConfirmed) {
+      // trigger delete api: food item
+      const res = await axiosSecure.delete(`/menu/${food._id}`);
+
+      if (res.data.deletedCount > 0) {
+        refetch();
+
+        toast(`${food.name} is deleted successfully!`);
+      } else {
+        console.log("Delete food item failed");
+      }
     }
 
     console.log("Food item delete response=>", res.data);
@@ -72,7 +87,7 @@ const ManageItems = () => {
                     <td>${food.price}</td>
                     <th>
                       <Link to={`/dashboard/updateItem/${food._id}`}>
-                      {/* <Link to={`/menu/${food._id}`}> */}
+                        {/* <Link to={`/menu/${food._id}`}> */}
                         <button className="btn btn-ghost btn-xs bg-[#D1A054]">
                           <FaEdit className="text-white text-md"></FaEdit>
                         </button>

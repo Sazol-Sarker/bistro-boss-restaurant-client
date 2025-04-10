@@ -2,6 +2,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import useCart from "./../../../hooks/useCart";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const { cart, refetch } = useCart();
@@ -15,16 +16,34 @@ const Cart = () => {
     .toFixed(2);
   //   console.log("totalOrders totalPrice=>", totalOrders, totalPrice);
   const handleCartItemDelete = (id) => {
-    // delete api: cart
-    axiosSecure
-      .delete(`carts/${id}`)
-      .then((res) => {
-        // console.log("Deleting cart item=>", res.data);
-        refetch();
-      })
-      .catch((error) => {
-        console.log("Error during cart item delete=>", error);
-      });
+    // delete action pop alert
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete api: cart
+        axiosSecure
+          .delete(`carts/${id}`)
+          .then((res) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            // console.log("Deleting cart item=>", res.data);
+            refetch();
+          })
+          .catch((error) => {
+            console.log("Error during cart item delete=>", error);
+          });
+      }
+    });
   };
 
   return (
@@ -33,22 +52,20 @@ const Cart = () => {
         <h2 className="text-2xl font-bold">Total orders: {totalOrders}</h2>
         <h2 className="text-2xl font-bold">Total price: ${totalPrice}</h2>
 
-        {
-          Number(totalPrice)>0?<Link to={"/dashboard/payment"}>
+        {Number(totalPrice) > 0 ? (
+          <Link to={"/dashboard/payment"}>
+            <button className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg">
+              pay
+            </button>
+          </Link>
+        ) : (
           <button
-            
-            className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg"
-          >
-            pay
-          </button>
-        </Link>:
-        <button
             disabled
             className="text-xl opacity-30 text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg"
           >
             pay
           </button>
-        }
+        )}
       </div>
       {/* cart items table */}
       {cart.length > 0 ? (

@@ -51,6 +51,10 @@ const AllUsers = () => {
   };
 
   const handleUserRoleUpdate = (id, newRole) => {
+   
+   
+   
+   
     // PATCH API: users
     axiosSecure
       .patch(`/users/${id}`, { newRole })
