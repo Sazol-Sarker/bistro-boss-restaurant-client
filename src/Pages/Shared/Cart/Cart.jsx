@@ -48,6 +48,7 @@ const Cart = () => {
 
   return (
     <>
+    <title>Bistro Boss | Cart</title>
       <div className="uppercase w-full flex justify-evenly gap-x-5">
         <h2 className="text-2xl font-bold">Total Items In orders: {totalOrders}</h2>
         <h2 className="text-2xl font-bold">Total price: ${totalPrice}</h2>

@@ -20,6 +20,8 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import AddReview from "../Pages/Dashboard/AddReview/AddReview";
+import Bookings from "../Pages/Dashboard/Bookings/Bookings";
+import Reservation from "../Pages/Dashboard/Reservation/Reservation";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
     {
       path:'paymentHistory',
       element:<PaymentHistory></PaymentHistory>
+    },
+    {
+      path:'bookings',
+      element:<Bookings></Bookings>
+    },
+    {
+      path:'reservation',
+      element:<Reservation></Reservation>
     },
 
 

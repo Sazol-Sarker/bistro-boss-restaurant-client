@@ -157,7 +157,7 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li className="menu uppercase">
-              <NavLink to="/dashboard/cart">
+              <NavLink to="/dashboard/bookings">
                 <FaShoppingCart />
                 manage bookings
               </NavLink>
@@ -185,7 +185,8 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="/dashboard/payment">
+          {/* <NavLink to="/dashboard/payment"> */}
+          <NavLink to="/dashboard/reservation">
             <SlCalender />
             reservation
           </NavLink>
@@ -209,7 +210,7 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/bookings">
             <FcRating />
             my booking
           </NavLink>

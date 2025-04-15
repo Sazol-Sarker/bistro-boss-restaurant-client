@@ -8,9 +8,10 @@ import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import useMenu from "../../../hooks/useMenu";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
 
 const AddReview = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,reset } = useForm();
   const { user } = useAuth();
   console.log("user==>", user?.email);
   const { menu } = useMenu();
@@ -33,7 +34,11 @@ const AddReview = () => {
 
     axiosPublic.post('/reviews',newReview)
     .then(res=>{
-        console.log("POST a movie==>",res.data);
+        // console.log("POST a review==>",res.data);
+        if(res.data.insertedId){
+          toast('Thanks for your kind review!')
+          reset()
+        }
     })
 
 
@@ -55,6 +60,7 @@ const AddReview = () => {
 
   return (
     <div>
+      <title>Bistro Boss | Add Review</title>
       <SectionTitle
         heading={"GIVE A Review..."}
         subHeading={"Sharing is Caring!!!"}
@@ -101,7 +107,6 @@ const AddReview = () => {
               style={{ height: "100px", overflowY: "auto" }}
             >
               {menu.map((item, idx) => (
-                <>
                   <option
                     key={idx}
                     value={item.name}
@@ -112,9 +117,9 @@ const AddReview = () => {
                     className="my-1 py-1 hover:bg-slate-100"
                   >
                     {item.name}
+                 
                   </option>
-                  <hr />
-                </>
+                
               ))}
             </select>
           </div>

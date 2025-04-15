@@ -29,6 +29,7 @@ const {data:paymentsHistory=[]}=useQuery({
 
   return (
     <div>
+      <title>Bistro Boss | Payment History</title>
         
         <SectionTitle heading={"Payment history"} subHeading={"At a glance"}></SectionTitle>
       {/* cart items table */}
@@ -44,7 +45,7 @@ const {data:paymentsHistory=[]}=useQuery({
                   <th>Transaction Id</th>
                   <th>No. of Items</th>
                   <th>Total Price</th>
-                  <th className="rounded-tr-md">Payment Date</th>
+                  <th className="rounded-tr-md">Payment Date (UTC+0)</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,7 +58,7 @@ const {data:paymentsHistory=[]}=useQuery({
                     <td>{item?.transactionId}</td>
                     <td>{item?.cartIds?.length}</td>
                     <td>${item?.price}</td>
-                    <td>{item?.date||item?.data}</td>
+                    <td>{`${item?.date.split('T')[0]}`} <span className="font-semibold ml-2">{`${item?.date.split('T')[1].split('.')[0]}`}</span></td>
                   </tr>
                 ))}
               </tbody>
