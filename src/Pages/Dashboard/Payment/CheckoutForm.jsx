@@ -11,14 +11,17 @@ import Payment from "./Payment";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CheckoutForm = () => {
-  const { cart, isLoading,refetch } = useCart();
+  const { cart, isLoading, refetch } = useCart();
+  const queryClient = useQueryClient();
+
   const { user } = useAuth();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [errors, setErrors] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const [transactionId,setTransactionId]=useState('')
+  const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -27,20 +30,16 @@ const CheckoutForm = () => {
   // console.log("totalPrice===>", totalPrice);
 
   useEffect(() => {
-    if(totalPrice>0)
-    {
-
-    
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        // console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      })
-      .catch((err) => {
-        setErrors("Failed to initiate payment.");
-      });
-
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          // console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        })
+        .catch((err) => {
+          setErrors("Failed to initiate payment.");
+        });
     }
   }, [axiosSecure, totalPrice]);
 
@@ -71,7 +70,7 @@ const CheckoutForm = () => {
       // console.log("[error]", error);
     } else {
       setErrors("");
-      
+
       // console.log("[PaymentMethod]", paymentMethod);
     }
 
@@ -95,39 +94,35 @@ const CheckoutForm = () => {
       console.log("Confirm error=>", confirmError);
     } else {
       // console.log("PaymentIntent=>", paymentIntent);
-      if(paymentIntent.status==='succeeded')
-      {
+      if (paymentIntent.status === "succeeded") {
         // e.target.reset();
-        
-        console.log("Transaction id=>",paymentIntent.id);
-        setTransactionId(paymentIntent.id)
+
+        console.log("Transaction id=>", paymentIntent.id);
+        setTransactionId(paymentIntent.id);
 
         // now save payment in DB
-        const payment={
-          transactionId:paymentIntent.id,
-          email:user.email,
-          price:totalPrice.toFixed(2),
-          date:new Date(), //use moment js for covinient time zone issue resolve
-          cartIds:cart.map(item=>item._id),
-          menuItemIds:cart.map(item=>item.itemId),
-          status:"Pending"
-        }
+        const payment = {
+          transactionId: paymentIntent.id,
+          email: user.email,
+          price: totalPrice.toFixed(2),
+          date: new Date(), //use moment js for covinient time zone issue resolve
+          cartIds: cart.map((item) => item._id),
+          menuItemIds: cart.map((item) => item.itemId),
+          status: "Pending",
+        };
 
-        const res=await axiosSecure.post('/payments',payment)
-        console.log("Db response : Payment post in DB-> API=>",res.data);
-        if(res?.data.paymentResult?.insertedId)
-        {
+        const res = await axiosSecure.post("/payments", payment);
+        console.log("Db response : Payment post in DB-> API=>", res.data);
+        if (res?.data.paymentResult?.insertedId) {
+
+          // queryClient.invalidateQueries(["cart"]);
+
           refetch()
-          toast(`Payment done with transaction id: ${paymentIntent.id}`)
-          navigate('/dashboard/paymentHistory')
-          
+          toast(`Payment done with transaction id: ${paymentIntent.id}`);
+          navigate("/dashboard/paymentHistory");
         }
-        
       }
     }
-
-
-
   };
 
   return (
@@ -159,13 +154,12 @@ const CheckoutForm = () => {
           </button>
         </form>
       </div>
-      {
-        errors&& <p className="text-red-500 text-center">{errors}</p>
-      }
-      {
-        transactionId&& <p className="text-green-500 text-center">Transaction id: {transactionId}</p>
-      }
-     
+      {errors && <p className="text-red-500 text-center">{errors}</p>}
+      {transactionId && (
+        <p className="text-green-500 text-center">
+          Transaction id: {transactionId}
+        </p>
+      )}
     </>
   );
 };
