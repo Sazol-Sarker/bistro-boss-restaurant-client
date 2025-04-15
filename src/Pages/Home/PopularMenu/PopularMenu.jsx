@@ -36,6 +36,8 @@ const PopularMenu = () => {
         subHeading={"Check it out"}
       ></SectionTitle>
       <MenuItemGrid
+        title={"offered"}
+        // title={"popular"}
         menuItems={popularMenu}
         btnText={"View Full Menu"}
       ></MenuItemGrid>

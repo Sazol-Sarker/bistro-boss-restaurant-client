@@ -88,7 +88,7 @@ const CheckoutForm = () => {
       }
     );
 
-    console.log("stripe || clientSecret==>", stripe, clientSecret);
+    // console.log("stripe || clientSecret==>", stripe, clientSecret);
 
     if (confirmError) {
       console.log("Confirm error=>", confirmError);
@@ -97,7 +97,7 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         // e.target.reset();
 
-        console.log("Transaction id=>", paymentIntent.id);
+        // console.log("Transaction id=>", paymentIntent.id);
         setTransactionId(paymentIntent.id);
 
         // now save payment in DB
@@ -112,7 +112,7 @@ const CheckoutForm = () => {
         };
 
         const res = await axiosSecure.post("/payments", payment);
-        console.log("Db response : Payment post in DB-> API=>", res.data);
+        // console.log("Db response : Payment post in DB-> API=>", res.data);
         if (res?.data.paymentResult?.insertedId) {
 
           // queryClient.invalidateQueries(["cart"]);

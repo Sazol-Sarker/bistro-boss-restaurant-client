@@ -13,6 +13,7 @@ import {
 
 import profileLogo from '../../../assets/others/profile.png'
 import { FaBowlFood } from "react-icons/fa6";
+import useCart from "../../../hooks/useCart";
 
 // usersStat,reviewsStat,menuStat,paymentsStat,revenue
 // [totalSpent,ordersCount,reviewsCount,paymentsCount,ordersCountInCart]
@@ -37,17 +38,18 @@ const gradients = [
 
 const UserHome = () => {
   const { user, loading } = useAuth();
+  const {cart}=useCart()
   const axiosSecure = useAxiosSecure();
 
   const { data: userStats = [] } = useQuery({
     queryKey: ["user-stats", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/user-stats/${user.email}`);
+      const res = await axiosSecure.get(`/user-stats/${user.email}?name=${user.displayName}`);
       return res.data;
     },
   });
-  console.log("userStats =>", userStats);
+  // console.log("userStats =>", userStats);
   const displayUserStats = userStats.slice(0, 3);
 
   return (
@@ -97,7 +99,7 @@ const UserHome = () => {
                 <FaDollarSign className="text-2xl text-[#cfba3e]" />
               </div>
               <div className="text-[#cfba3e]">
-                Total Spent: {userStats[0]}
+                Total Spent: {userStats[0]}$
                 
               </div>
             </div>
@@ -115,6 +117,8 @@ const UserHome = () => {
                 <FaComments className="text-2xl text-[#6abdc0]" />
               </div>
               <div className="text-[#6abdc0]">
+                {/* TOCHECK: not working */}
+                {/* Total Reviews: {userStats[2]} */}
                 Total Reviews: {userStats[2]}
                
               </div>
@@ -132,7 +136,8 @@ const UserHome = () => {
               <div className="mx-2">
                 <FaBowlFood className="text-2xl text-[#cd595d]" />
               </div>
-              <div className=" text-[#cd595d]">Number of Food Items in cart: {userStats[3]}</div>
+              {/* <div className=" text-[#cd595d]">Number of Food Items in cart: {userStats[3]}</div> */}
+              <div className=" text-[#cd595d]">Number of Food Items in cart: {cart.length}</div>
             </div>
           </div>
         </div>

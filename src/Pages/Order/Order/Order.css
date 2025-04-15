@@ -1,0 +1,13 @@
+
+
+.react-tabs__tab {
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .react-tabs__tab--selected {
+    border-bottom: 4px solid skyblue;
+    color: green;
+    font-weight: bold;
+  }

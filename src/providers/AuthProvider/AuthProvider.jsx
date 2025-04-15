@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
         // toast("Email not verified! Check inbox or spam to verify.");
       }
 
-      if (currentUser.emailVerified || isGithubLogin) {
+      if (currentUser?.emailVerified || isGithubLogin) {
         setUser(currentUser);
         setLoading(false);
         setIsGithubLogin(false);

@@ -49,7 +49,7 @@ const OrderTab = ({ category }) => {
         </Swiper>
       </div> */}
 
-      <div className="my-20">
+      <div className="">
       <Swiper
         pagination={pagination}
         modules={[Pagination]}

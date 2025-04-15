@@ -18,19 +18,19 @@ const Dashboard = () => {
   const { user } = useAuth();
   const { cart, isLoading } = useCart();
   const [isAdmin, isAdminLoading] = useAdmin();
-  if (isLoading || isAdminLoading) {
-    return (
-      <div className="flex items-center justify-center">
-        <span className="loading loading-dots loading-xs"></span>
-        <span className="loading loading-dots loading-sm"></span>
-        <span className="loading loading-dots loading-md"></span>
-        <span className="loading loading-dots loading-lg"></span>
-      </div>
-    );
-  }
+  // if (isLoading || isAdminLoading) {
+  //   return (
+  //     <div className="flex items-center justify-center">
+  //       <span className="loading loading-dots loading-xs"></span>
+  //       <span className="loading loading-dots loading-sm"></span>
+  //       <span className="loading loading-dots loading-md"></span>
+  //       <span className="loading loading-dots loading-lg"></span>
+  //     </div>
+  //   );
+  // }
   // const [dynamicNavLinks, setDynamicNavLinks] = useState(null);
 
-  console.log("cart.length in dashboard.jsx=>", cart.length);
+  // console.log("cart.length in dashboard.jsx=>", cart.length);
 
   // admin decision
   // const isAdmin = false;
@@ -203,7 +203,7 @@ const Dashboard = () => {
           </NavLink>
         </li>
         <li className="menu uppercase">
-          <NavLink to="">
+          <NavLink to="/dashboard/addReview">
             <MdReviews className="text-lg" />
             add review
           </NavLink>
