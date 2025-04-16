@@ -17,9 +17,12 @@ const Reservation = () => {
   const { register, handleSubmit, setValue, reset } = useForm();
   const [guestNumber, setGuestNumber] = useState(1);
   const [time, setTime] = useState(new Date());
+
   //   form data handler
   const onSubmit = (data) => {
     console.log("reservation data==>", data);
+    // by default : pending, admin will confirm
+    data.status="pending"
 
     // validation
     const today = new Date().toISOString().split("T")[0];

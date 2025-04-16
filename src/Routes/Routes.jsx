@@ -7,11 +7,11 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 // import Dashboard from "../Components/Dashboard/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
-import Dashboard from './../Layout/Dashboard';
-import Cart from './../Pages/Shared/Cart/Cart';
+import Dashboard from "./../Layout/Dashboard";
+import Cart from "./../Pages/Shared/Cart/Cart";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
-import AdminRoutes from './AdminRoutes';
+import AdminRoutes from "./AdminRoutes";
 import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
@@ -22,11 +22,13 @@ import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import AddReview from "../Pages/Dashboard/AddReview/AddReview";
 import Bookings from "../Pages/Dashboard/Bookings/Bookings";
 import Reservation from "../Pages/Dashboard/Reservation/Reservation";
+import ContactUs from "../Components/ContactUs/ContactUs";
+import ContactMsg from "../Pages/Dashboard/ContactMsg/ContactMsg";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement:<ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Main></Main>,
     children: [
       {
@@ -60,82 +62,90 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:'/dashboard',
-    errorElement:<ErrorPage></ErrorPage>,
-    element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
-  children:[
-    // normal user routes
-    {
-      path:'userHome',
-      element:<UserHome></UserHome>
-    },
-    {
-      path:'cart',
-      element:<Cart></Cart>
-    },
-    {
-      path:'addReview',
-      element:<AddReview></AddReview>
-    },
-    {
-    path:'payment',
-    element:<Payment></Payment>
-    },
-    {
-      path:'paymentHistory',
-      element:<PaymentHistory></PaymentHistory>
-    },
-    {
-      path:'bookings',
-      element:<Bookings></Bookings>
-    },
-    {
-      path:'reservation',
-      element:<Reservation></Reservation>
-    },
+    path: "/dashboard",
+    errorElement: <ErrorPage></ErrorPage>,
+    element: (
+      <PrivateRoutes>
+        <Dashboard></Dashboard>
+      </PrivateRoutes>
+    ),
+    children: [
+      // normal user routes
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      {
+        path: "addReview",
+        element: <AddReview></AddReview>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "bookings",
+        element: <Bookings></Bookings>,
+      },
+      {
+        path: "reservation",
+        element: <Reservation></Reservation>,
+      },
 
-
-    // admin user routes
-    {
-      path:'adminHome',
-      element:<AdminHome></AdminHome>
-    },
-    {
-      path:'allUsers',
-      element:<AdminRoutes><AllUsers></AllUsers></AdminRoutes>
-    },
-    {
-      path:'addItems',
-      element:<AdminRoutes><AddItems></AddItems></AdminRoutes>
-    },
-    {
-      path:'manageItems',
-      element:<AdminRoutes><ManageItems></ManageItems></AdminRoutes>
-    },
-    {
-      path:'updateItem/:id',
-      element:<UpdateItem></UpdateItem>,
-      loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
-    },
-    // {
-    //   path:'userHome',
-    //   element:<userHome></userHome>
-    // }, 
-    // {
-    //   path:'reservation',
-    //   element:<Reservation></Reservation>
-    // },
-    // {
-    //   path:'review',
-    //   element:<Review></Review>
-    // }, 
-    // {
-    //   path:'bookings',
-    //   element:<Bookings></Bookings>
-    // }
-
-  ]
-  }
+      // admin user routes
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "allUsers",
+        element: (
+          <AdminRoutes>
+            <AllUsers></AllUsers>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "addItems",
+        element: (
+          <AdminRoutes>
+            <AddItems></AddItems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRoutes>
+            <ManageItems></ManageItems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "updateItem/:id",
+        element: <UpdateItem></UpdateItem>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
+      },
+      {
+        path:'contactMsg',
+        element:<ContactMsg></ContactMsg>
+      },
+      
+    ],
+  },
+  {
+    path: "/contact",
+    element: <ContactUs></ContactUs>,
+  },
 ]);
 
 export default router;

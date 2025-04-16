@@ -40,7 +40,7 @@ const AdminHome = () => {
       return res.data;
     },
   });
-  console.log("admin stats=>", stats);
+  // console.log("admin stats=>", stats);
 
   // order stats
   const { data: chartData = [] } = useQuery({
@@ -125,10 +125,10 @@ const AdminHome = () => {
     <div className="text-center my-5">
       <h2 className="text-3xl font-bold my-5">
         Hi,
-        <span className="ml-2">
+        <span className="ml-2 text-amber-400">
           {user?.email ? user.displayName : "Adventurer"}
         </span>
-        . Welcome home!
+        . Welcome to Admin home!
       </h2>
 
       <div className="flex-grow ">

@@ -135,88 +135,84 @@ const Dashboard = () => {
       {/*left sided drawer */}
       <div className="w-full flex items-start gap-x-5 border-2 border-blue-300">
         <div className="bg-[#D1A054] w-64 min-h-screen px-2">
-          <div className="left-0">{
-            
-            isAdmin?<ul>
-            <li className="menu uppercase">
-              <NavLink to="/dashboard/adminHome">
-                <IoHome className="text-red-500 text-lg" />
-                admin home
-              </NavLink>
-            </li>
-            <li className="menu uppercase">
-              <NavLink to="/dashboard/addItems">
-                <SlCalender />
-                add items
-              </NavLink>
-            </li>
-            <li className="menu uppercase">
-              <NavLink to="/dashboard/manageItems">
-                <FaWallet />
-                manage items
-              </NavLink>
-            </li>
-            <li className="menu uppercase">
-              <NavLink to="/dashboard/bookings">
-                <FaShoppingCart />
-                manage bookings
-              </NavLink>
-            </li>
-            <li className="menu uppercase">
-              <NavLink to="/dashboard/allUsers">
-                <MdReviews className="text-lg" />
-                all users
-              </NavLink>
-            </li>
-            {/* <li className="menu uppercase">
-              <NavLink to="">
-                <FcRating />
-                my booking
-              </NavLink>
-            </li> */}
-          </ul>
-          
-          :
-          <ul>
-        <li className="menu uppercase">
-          <NavLink to="/dashboard/userHome">
-            <IoHome className="text-red-500 text-lg" />
-            user home
-          </NavLink>
-        </li>
-        <li className="menu uppercase">
-          {/* <NavLink to="/dashboard/payment"> */}
-          <NavLink to="/dashboard/reservation">
-            <SlCalender />
-            reservation
-          </NavLink>
-        </li>
-        <li className="menu uppercase">
-          <NavLink to="/dashboard/paymentHistory">
-            <FaWallet />
-            payment history
-          </NavLink>
-        </li>
-        <li className="menu uppercase">
-          <NavLink to="/dashboard/cart">
-            <FaShoppingCart />
-            my cart <span className="font-bold">({cart?.length})</span>
-          </NavLink>
-        </li>
-        <li className="menu uppercase">
-          <NavLink to="/dashboard/addReview">
-            <MdReviews className="text-lg" />
-            add review
-          </NavLink>
-        </li>
-        <li className="menu uppercase">
-          <NavLink to="/dashboard/bookings">
-            <FcRating />
-            my booking
-          </NavLink>
-        </li>
-      </ul>
-          }</div>
+          <div className="left-0">
+            {isAdmin ? (
+              <ul>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/adminHome">
+                    <IoHome className="text-red-500 text-lg" />
+                    admin home
+                  </NavLink>
+                </li>
+
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/addItems">
+                    <SlCalender />
+                    add items
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/manageItems">
+                    <FaWallet />
+                    manage items
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/bookings">
+                    <FaShoppingCart />
+                    manage bookings
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/allUsers">
+                    <MdReviews className="text-lg" />
+                    all users
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/contactMsg">
+                    <IoMail />
+                    Support
+                  </NavLink>
+                </li>
+              </ul>
+            ) : (
+              <ul>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/userHome">
+                    <IoHome className="text-red-500 text-lg" />
+                    user home
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  {/* <NavLink to="/dashboard/payment"> */}
+                  <NavLink to="/dashboard/reservation">
+                    <SlCalender />
+                    reservation
+                  </NavLink>
+                </li>
+
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/bookings">
+                    <FcRating />
+                    my booking
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  <NavLink to="/dashboard/addReview">
+                    <MdReviews className="text-lg" />
+                    add review
+                  </NavLink>
+                </li>
+                <li className="menu uppercase">
+                  <NavLink to="/contact">
+                    <IoMail />
+                    Contact
+                  </NavLink>
+                </li>
+              </ul>
+            )}
+          </div>
           {/* <div className="left-0">{isAdmin ? adminNavLinks : userNavLinks}</div> */}
           <div className="divider"></div>
           {/* shared navbar */}
@@ -241,15 +237,22 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="menu uppercase">
-                <NavLink to="/contact">
-                  <IoMail />
-                  contact
+                <NavLink to="/dashboard/cart">
+                  <FaShoppingCart />
+                  my cart <span className="font-bold">({cart?.length})</span>
+                </NavLink>
+              </li>
+              <li className="menu uppercase">
+                <NavLink to="/dashboard/paymentHistory">
+                  <FaWallet />
+                  payment history
                 </NavLink>
               </li>
             </ul>
           </div>
         </div>
         {/* right div */}
+        {/* user/admin dashboard here */}
         <div className="w-full border-2 border-white">
           <Outlet></Outlet>
         </div>

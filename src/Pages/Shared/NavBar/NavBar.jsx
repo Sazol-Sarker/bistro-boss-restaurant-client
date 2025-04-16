@@ -8,6 +8,7 @@ import { BsCart4 } from "react-icons/bs";
 import './NavBar.css'
 import useCart from "../../../hooks/useCart";
 import useAdmin from "../../../hooks/useAdmin";
+import { FaDoorOpen } from "react-icons/fa6";
 
 const NavBar = () => {
   const { user, setUser, logoutUser } = useContext(AuthContext);
@@ -33,9 +34,11 @@ const NavBar = () => {
       <li>
         <Link to="/">HOME</Link>
       </li>
-      <li>
+      {
+        isAdmin?"":<li>
         <Link to="/contact">CONTACT US</Link>
       </li>
+      }
 
       {!user && (
         <li>
@@ -81,7 +84,7 @@ const NavBar = () => {
         <Link
           to="/"
           onClick={handleLogout}
-          className="flex  ml-10 items-center gap-x-2"
+          className="flex  ml-10 items-center gap-x-2 hover:text-blue-500"
         >
           <div className="flex flex-col items-center">
             <img
@@ -92,7 +95,8 @@ const NavBar = () => {
             <p>{user?.displayName}</p>
           </div>
           <div>
-            <p>SIGNOUT</p>
+            <p className="flex items-center gap-x-1">SIGNOUT <FaDoorOpen className="text-xl text-blue-400"></FaDoorOpen></p>
+            
           </div>
         </Link>
       ) : (

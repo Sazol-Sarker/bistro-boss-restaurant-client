@@ -128,7 +128,7 @@ const CheckoutForm = () => {
   return (
     <>
       <div className="flex justify-center items-center">
-        <form onSubmit={handleSubmit} className="w-1/2 mx-auto">
+        <form onSubmit={handleSubmit} className="w-1/2 mx-auto mt-5">
           <CardElement
             options={{
               style: {
@@ -148,7 +148,7 @@ const CheckoutForm = () => {
           <button
             type="submit"
             disabled={!stripe || !clientSecret}
-            className="btn bg-[#D1A054] mt-5 border-2 w-1/4 mx-auto"
+            className="btn bg-[#D1A054] mt-10 border-2 w-1/4 mx-auto flex items-center "
           >
             Pay <span>${totalPrice.toFixed(2)}</span>
           </button>

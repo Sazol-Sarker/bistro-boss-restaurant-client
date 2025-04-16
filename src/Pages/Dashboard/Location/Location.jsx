@@ -4,7 +4,7 @@ import { FaMap, FaTimesCircle } from "react-icons/fa";
 
 const Location = () => {
   return (
-    <div className=" w-10/12 mx-auto">
+    <div className=" w-10/12 mx-auto mt-5">
       <SectionTitle
         heading={"OUR LOCATION"}
         subHeading={"Visit Us"}
