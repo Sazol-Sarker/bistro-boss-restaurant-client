@@ -28,7 +28,7 @@ const FoodCard = ({ item }) => {
         itemImage: image,
         itemPrice: price,
       };
-      // axios.post("http://localhost:5000/carts", cartItem).then((res) => {
+      // axios.post("https://bistro-boss-restaurant-server-zjo1.onrender.com/carts", cartItem).then((res) => {
       axiosSecure.post("/carts", cartItem).then((res) => {
         if(res.data.insertedId){
 

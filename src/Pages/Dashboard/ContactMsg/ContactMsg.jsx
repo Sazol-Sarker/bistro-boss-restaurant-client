@@ -5,7 +5,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const ContactMsg = () => {
     const axiosPublic=useAxiosPublic()
-  const { data: contactMsg, refetch } = useQuery({
+  const { data: contactMsg,isLoading, refetch } = useQuery({
     queryKey: ["contactMsg"],
     queryFn: async () => {
       const res = await axiosPublic.get("/contactMsg");
@@ -13,6 +13,11 @@ const ContactMsg = () => {
       return res.data;
     },
   });
+
+  if(isLoading)
+    {
+      return <div>Loading....</div>
+    }
 
   console.log("contactMsg==>", contactMsg);
 
@@ -24,7 +29,8 @@ const ContactMsg = () => {
       ></SectionTitle>
 
       {/* support messages */}
-      <div className="overflow-x-auto">
+      {
+        contactMsg?<div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
           <thead>
@@ -49,7 +55,9 @@ const ContactMsg = () => {
             }
           </tbody>
         </table>
-      </div>
+      </div>:<div className="text-red-500 text-center">No Contact Messages Yet!</div>
+      }
+      
     </div>
   );
 };

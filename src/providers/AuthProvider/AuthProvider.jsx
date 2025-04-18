@@ -48,7 +48,6 @@ const AuthProvider = ({ children }) => {
   };
 
   // auth state observer set
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
@@ -60,34 +59,74 @@ const AuthProvider = ({ children }) => {
             // console.log("JWT AUTH=>", res.data);
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
-              setLoading(false);//added later
+              setLoading(false); //added later
             }
           })
           .catch((error) => {
             // console.log("JWT AUTH error=>", error);
           });
+
+        setUser(currentUser);
+        setLoading(false);
+        setIsGithubLogin(false);
+        console.log("On authProvider if =>");
       } 
       else {
+        console.log("On authProvider else =>");
         localStorage.removeItem("access-token");
-        setLoading(false);//added later
+        setLoading(false); //added later
 
         // toast("Email not verified! Check inbox or spam to verify.");
       }
 
-      if (currentUser?.emailVerified || isGithubLogin) {
-        setUser(currentUser);
-        setLoading(false);
-        setIsGithubLogin(false);
-        // console.log(uid);
-      }
-
-      console.log("On auth=>", currentUser);
+      // console.log("On auth=>",user);
+      // console.log("On auth=>", currentUser);
     });
 
     return () => {
       return unsubscribe();
     };
   }, [isGithubLogin, axiosPublic]);
+
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     if (currentUser) {
+  //       const userInfo = { email: currentUser.email };
+  //       // get+store jwt token -> localstorage
+  //       axiosPublic
+  //         .post("/jwt", userInfo)
+  //         .then((res) => {
+  //           // console.log("JWT AUTH=>", res.data);
+  //           if (res.data.token) {
+  //             localStorage.setItem("access-token", res.data.token);
+  //             setLoading(false);//added later
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           // console.log("JWT AUTH error=>", error);
+  //         });
+  //     }
+  //     else {
+  //       localStorage.removeItem("access-token");
+  //       setLoading(false);//added later
+
+  //       // toast("Email not verified! Check inbox or spam to verify.");
+  //     }
+
+  //     if (currentUser?.emailVerified || isGithubLogin) {
+  //       setUser(currentUser);
+  //       setLoading(false);
+  //       setIsGithubLogin(false);
+  //       // console.log(uid);
+  //     }
+
+  //     console.log("On auth=>", currentUser);
+  //   });
+
+  //   return () => {
+  //     return unsubscribe();
+  //   };
+  // }, [isGithubLogin, axiosPublic]);
 
   //   Update a user's profile
   const updateUserProfile = (name) => {

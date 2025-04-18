@@ -11,11 +11,9 @@ import Payment from "./Payment";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
 
 const CheckoutForm = () => {
   const { cart, isLoading, refetch } = useCart();
-  const queryClient = useQueryClient();
 
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -92,9 +90,10 @@ const CheckoutForm = () => {
 
     if (confirmError) {
       console.log("Confirm error=>", confirmError);
-    } else {
-      // console.log("PaymentIntent=>", paymentIntent);
-      if (paymentIntent.status === "succeeded") {
+    } 
+    else {
+      console.log("PaymentIntent=>", paymentIntent);
+      if (paymentIntent?.status === "succeeded") {
         // e.target.reset();
 
         // console.log("Transaction id=>", paymentIntent.id);
@@ -114,10 +113,9 @@ const CheckoutForm = () => {
         const res = await axiosSecure.post("/payments", payment);
         // console.log("Db response : Payment post in DB-> API=>", res.data);
         if (res?.data.paymentResult?.insertedId) {
-
           // queryClient.invalidateQueries(["cart"]);
 
-          refetch()
+          refetch();
           toast(`Payment done with transaction id: ${paymentIntent.id}`);
           navigate("/dashboard/paymentHistory");
         }

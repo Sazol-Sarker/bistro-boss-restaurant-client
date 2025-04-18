@@ -62,7 +62,7 @@ const role="user"
 
         // POST API
         const newUser = { name, email,role };
-        axios.post("http://localhost:5000/users", newUser).then((res) => {
+        axios.post("https://bistro-boss-restaurant-server-zjo1.onrender.com/users", newUser).then((res) => {
           // console.log("DB response, user create=>", res.data);
           if (res.data.insertedId)
             toast(`New user ${email} created in DB, welcome!`);

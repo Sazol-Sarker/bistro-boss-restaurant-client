@@ -6,11 +6,13 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosPublic from "./../../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Bookings = () => {
   const { user, loading } = useAuth();
+  const [isAdmin]=useAdmin()
   const axiosPublic = useAxiosPublic();
-  const [isButtonPressed, setIsButtonPressed] = useState(null);
+  // const [isButtonPressed, setIsButtonPressed] = useState(null);
 
   const {
     data: reservationsData,
@@ -20,7 +22,7 @@ const Bookings = () => {
     queryKey: ["reservations", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosPublic.get(`/reservations`);
+      const res = await axiosPublic.get(`/reservations${isAdmin?"":`/${user.email}`}`);
       return res.data;
     },
   });
@@ -113,20 +115,22 @@ const Bookings = () => {
 
                     <td className="font-bold">{data.status}</td>
                     <th className="flex flex-col items-center">
-                      <button
-                      disabled={isButtonPressed||data.status==="confirmed"}
+                     {
+                      isAdmin? <button
+                      disabled={data.status==="confirmed"}
                         onClick={() => {
                           
-                          setIsButtonPressed(true);
+                          // setIsButtonPressed(true);
                           handleReservation(data._id, true);
                         }}
                         className="btn btn-ghost btn-xs hover:text-red-500 p-4 text-[14px]"
                       >
                         Confirm
-                      </button>
-                      <button disabled={isButtonPressed||data.status==="cancelled"}
+                      </button>:""
+                     }
+                      <button disabled={data.status==="cancelled"}
                         onClick={() => {
-                          setIsButtonPressed(true);
+                          // setIsButtonPressed(true);
                           handleReservation(data._id, false);
                         }}
                         className="btn btn-ghost btn-xs hover:text-red-500 p-4 text-[14px]"

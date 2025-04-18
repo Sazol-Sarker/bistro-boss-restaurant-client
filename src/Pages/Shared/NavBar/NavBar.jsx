@@ -15,12 +15,12 @@ const NavBar = () => {
    const [isAdmin] = useAdmin(); 
   const {cart}=useCart()
   const navigate = useNavigate();
-  // console.log(user?.displayName);
+  console.log("user -- userName in NavBar==>",user,user?.displayName);
 
   const handleLogout = () => {
     logoutUser()
       .then(() => {
-        toast("Logout successfull!");
+        toast("Logout successfull !");
         setUser(null);
       })
       .catch((error) => {
@@ -46,10 +46,6 @@ const NavBar = () => {
         </li>
       )}
 
-      {/* <li>
-        <Link to="/dashboard">DASHBOARD</Link>
-      </li> */}
-
       {user?isAdmin? <li>
           <Link to="/dashboard/adminHome">DASHBOARD</Link>
         </li>:<li>
@@ -57,13 +53,8 @@ const NavBar = () => {
         </li>:<li>
           <Link to="/dashboard/userHome">DASHBOARD</Link>
         </li>
-        
       }
       <li>
-        {/* <button className="btn">
-          Inbox
-          <div className="badge">+99</div>
-        </button> */}
 
         <Link to="/menu" className="flex items-center uppercase">
           Our menu

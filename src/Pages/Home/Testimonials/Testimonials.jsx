@@ -20,7 +20,7 @@ const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   // console.log("reviews", reviews);
   useEffect(() => {
-    axios.get("http://localhost:5000/reviews").then((res) => {
+    axios.get("https://bistro-boss-restaurant-server-zjo1.onrender.com/reviews").then((res) => {
       setReviews(res.data);
     });
   }, []);

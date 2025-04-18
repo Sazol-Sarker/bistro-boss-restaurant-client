@@ -133,7 +133,7 @@ const router = createBrowserRouter([
         path: "updateItem/:id",
         element: <UpdateItem></UpdateItem>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://bistro-boss-restaurant-server-zjo1.onrender.com/menu/${params.id}`),
       },
       {
         path:'contactMsg',
