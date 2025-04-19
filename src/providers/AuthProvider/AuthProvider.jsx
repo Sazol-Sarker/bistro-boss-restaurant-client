@@ -66,6 +66,7 @@ const AuthProvider = ({ children }) => {
             // console.log("JWT AUTH error=>", error);
           });
 
+          // *******//
         setUser(currentUser);
         setLoading(false);
         setIsGithubLogin(false);
