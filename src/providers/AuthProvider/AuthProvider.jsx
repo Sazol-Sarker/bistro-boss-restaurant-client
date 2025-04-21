@@ -50,6 +50,9 @@ const AuthProvider = ({ children }) => {
   // auth state observer set
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      
+      setUser(currentUser);
+      console.log("On auth currentUser=>", currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         // get+store jwt token -> localstorage
@@ -60,19 +63,18 @@ const AuthProvider = ({ children }) => {
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
               setLoading(false); //added later
+              setIsGithubLogin(false);
             }
           })
           .catch((error) => {
             // console.log("JWT AUTH error=>", error);
           });
 
-          // *******//
-        setUser(currentUser);
-        setLoading(false);
-        setIsGithubLogin(false);
+        // *******//
         console.log("On authProvider if =>");
-      } 
-      else {
+
+       
+      } else {
         console.log("On authProvider else =>");
         localStorage.removeItem("access-token");
         setLoading(false); //added later
@@ -81,7 +83,6 @@ const AuthProvider = ({ children }) => {
       }
 
       // console.log("On auth=>",user);
-      // console.log("On auth=>", currentUser);
     });
 
     return () => {

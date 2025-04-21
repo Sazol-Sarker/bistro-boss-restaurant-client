@@ -13,6 +13,7 @@ const useAdmin = () => {
        enabled:!loading,
        queryFn:async()=>{
         const res=await axiosSecure(`/users/${user.email}`)
+        console.log("Axios headers:", res.config.headers);
         // console.log("Admin role check in useAdmin=>",res.data);
         return res.data?.admin
        }

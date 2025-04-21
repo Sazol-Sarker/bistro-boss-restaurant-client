@@ -133,7 +133,7 @@ const Dashboard = () => {
     <>
       <title>Bistro Boss | Dashboard</title>
       {/*left sided drawer */}
-      <div className="w-full flex items-start gap-x-5 border-2 border-blue-300">
+      <div className="w-full flex items-start gap-x-5 ">
         <div className="bg-[#D1A054] w-64 min-h-screen px-2">
           <div className="left-0">
             {isAdmin ? (

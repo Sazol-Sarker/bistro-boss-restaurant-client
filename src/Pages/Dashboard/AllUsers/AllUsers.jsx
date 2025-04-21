@@ -5,9 +5,11 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa6";
 import { FaUserSecret } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import useAxiosPublic from './../../../hooks/useAxiosPublic';
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const axiosPublic=useAxiosPublic()
   const {
     data: users = [],
     refetch,
@@ -17,9 +19,11 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users",{headers:{
-        authorization:`Bearer ${localStorage.getItem('access-token')}`
-      }});
+      // const res = await axiosSecure.get("/users",{headers:{
+      //   authorization:`Bearer ${localStorage.getItem('access-token')}`
+      // }});
+      const res = await axiosSecure.get("/users");
+
       //   console.log(res.data);
       return res.data;
     },
