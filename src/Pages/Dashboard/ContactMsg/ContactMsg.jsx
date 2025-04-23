@@ -19,7 +19,7 @@ const ContactMsg = () => {
       return <div>Loading....</div>
     }
 
-  console.log("contactMsg==>", contactMsg);
+  // console.log("contactMsg==>", contactMsg);
 
   return (
     <div>

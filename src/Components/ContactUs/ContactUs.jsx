@@ -38,7 +38,7 @@ const ContactUs = () => {
     // TOCHECK: check captcha, send mail
     axiosPublic.post('/contactUs',data)
     .then(res=>{
-      console.log("Contact with captcha response=>>",res.data);
+      // console.log("Contact with captcha response=>>",res.data);
       if(res.data.insertedId){
         toast('Message sent. Thanks for reaching out!')
         reset()

@@ -10,7 +10,7 @@ const useMenu = () => {
     // console.log(popularMenu);
     // fetch menu items
     // useEffect(() => {
-    //   axios.get("https://bistro-boss-restaurant-server-zjo1.onrender.com/menu")
+    //   axios.get("http://localhost:5000/menu")
     //   .then((res) => {
     //     // console.log("MENU",res.data);
     //     setMenu(res.data);

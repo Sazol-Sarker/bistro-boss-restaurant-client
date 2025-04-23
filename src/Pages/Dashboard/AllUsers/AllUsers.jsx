@@ -70,12 +70,12 @@ const AllUsers = () => {
         }
       })
       .catch((error) => {
-        console.log("error==>", error);
+        // console.log("error==>", error);
       });
   };
 
   return (
-    <div className="w-full border-2 border-teal-500">
+    <div className="w-full ">
       <div className="text-2xl font-bold uppercase flex items-center justify-center mb-5">
         total users: {users.length}
       </div>

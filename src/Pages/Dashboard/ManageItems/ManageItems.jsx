@@ -40,7 +40,7 @@ const ManageItems = () => {
       }
     }
 
-    console.log("Food item delete response=>", res.data);
+    // console.log("Food item delete response=>", res.data);
   };
 
   return (

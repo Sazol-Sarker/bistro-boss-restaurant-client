@@ -24,6 +24,7 @@ import Bookings from "../Pages/Dashboard/Bookings/Bookings";
 import Reservation from "../Pages/Dashboard/Reservation/Reservation";
 import ContactUs from "../Components/ContactUs/ContactUs";
 import ContactMsg from "../Pages/Dashboard/ContactMsg/ContactMsg";
+import PaymentSuccess from "../Components/PaymentSuccess/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -133,7 +134,8 @@ const router = createBrowserRouter([
         path: "updateItem/:id",
         element: <UpdateItem></UpdateItem>,
         loader: ({ params }) =>
-          fetch(`https://bistro-boss-restaurant-server-zjo1.onrender.com/menu/${params.id}`),
+          // https://bistro-boss-restaurant-server-zjo1.onrender.com
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
         path:'contactMsg',
@@ -146,6 +148,10 @@ const router = createBrowserRouter([
     path: "/contact",
     element: <ContactUs></ContactUs>,
   },
+  {
+    path:'/payment-success',
+    element:<PaymentSuccess></PaymentSuccess>
+  }
 ]);
 
 export default router;

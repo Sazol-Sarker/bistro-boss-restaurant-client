@@ -15,7 +15,7 @@ const NavBar = () => {
    const [isAdmin] = useAdmin(); 
   const {cart}=useCart()
   const navigate = useNavigate();
-  console.log("user -- userName in NavBar==>",user,user?.displayName);
+  // console.log("user -- userName in NavBar==>",user,user?.displayName);
 
   const handleLogout = () => {
     logoutUser()

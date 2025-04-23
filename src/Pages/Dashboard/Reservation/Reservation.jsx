@@ -20,7 +20,7 @@ const Reservation = () => {
 
   //   form data handler
   const onSubmit = (data) => {
-    console.log("reservation data==>", data);
+    // console.log("reservation data==>", data);
     // by default : pending, admin will confirm
     data.status="pending"
 
@@ -33,7 +33,7 @@ const Reservation = () => {
 
     // POST reservation data into DB
     axiosPublic.post("/reservations", data).then((res) => {
-      console.log("reservation post response=>", res.data);
+      // console.log("reservation post response=>", res.data);
       if (res.data.insertedId) {
         toast("Reservation confirm!");
         setGuestNumber(1);

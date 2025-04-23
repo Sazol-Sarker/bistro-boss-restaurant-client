@@ -56,7 +56,7 @@ const Login = () => {
 
       loginUser(email, password)
         .then((result) => {
-          console.log(result.user);
+          // console.log(result.user);
           if (result.user.emailVerified) {
             toast("User logged in!");
             // console.log("user LOGGEDIN=>",result.user);

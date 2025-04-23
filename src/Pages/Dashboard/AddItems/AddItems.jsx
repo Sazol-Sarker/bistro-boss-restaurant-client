@@ -57,7 +57,7 @@ const AddItems = () => {
         heading={"ADD AN ITEM"}
       ></SectionTitle>
 
-      <div className="border-2 border-teal-300">
+      <div className="">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="m-10 bg-slate-100 p-10"

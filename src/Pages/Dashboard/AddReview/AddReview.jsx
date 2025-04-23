@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const AddReview = () => {
   const { register, handleSubmit,reset } = useForm();
   const { user } = useAuth();
-  console.log("user==>", user?.email);
+  // console.log("user==>", user?.email);
   const { menu } = useMenu();
   const axiosPublic=useAxiosPublic()
   const [userRating, setUserRating] = useState(1);
@@ -24,7 +24,7 @@ const AddReview = () => {
 //   console.log("showSelectMenu==>", showSelectMenu);
 //   form data handler
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const msg=`(${data.likedRecipe}, Suggestion: ${data.suggestion} ) - ${data.review}`
     const newReview={
         name:user?.displayName||user?.email,
@@ -45,7 +45,7 @@ const AddReview = () => {
   };
 
   const handleRating = (rating) => {
-    console.log(rating);
+    // console.log(rating);
     setUserRating(rating);
   };
 

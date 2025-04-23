@@ -8,7 +8,7 @@ import useMenu from "../../../hooks/useMenu";
 const UpdateItem = () => {
   const navigate = useNavigate();
   const foodItem = useLoaderData();
-  console.log(foodItem);
+  // console.log(foodItem);
   const {refetch}=useMenu()
   const { _id, name, recipe, category, price } = foodItem;
   const axiosSecure = useAxiosSecure();
@@ -16,7 +16,7 @@ const UpdateItem = () => {
   // react-hook-form
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     const updatedFoodItem = {
       name: data.name,
       recipe: data.recipe,

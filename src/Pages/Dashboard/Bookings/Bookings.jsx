@@ -35,7 +35,7 @@ const Bookings = () => {
   //     }
   // })
 
-  console.log("reservationsData==>", reservationsData);
+  // console.log("reservationsData==>", reservationsData);
 
   if (isLoading || loading) {
     return <div className="spinner">loading...</div>;

@@ -92,7 +92,7 @@ const CheckoutForm = () => {
       console.log("Confirm error=>", confirmError);
     } 
     else {
-      console.log("PaymentIntent=>", paymentIntent);
+      // console.log("PaymentIntent=>", paymentIntent);
       if (paymentIntent?.status === "succeeded") {
         // e.target.reset();
 
@@ -104,7 +104,7 @@ const CheckoutForm = () => {
           transactionId: paymentIntent.id,
           email: user.email,
           price: totalPrice.toFixed(2),
-          date: new Date(), //use moment js for covinient time zone issue resolve
+          date: new Date(), //use moment js for convenient time zone issue resolve
           cartIds: cart.map((item) => item._id),
           menuItemIds: cart.map((item) => item.itemId),
           status: "Pending",

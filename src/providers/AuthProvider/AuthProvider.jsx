@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       
       setUser(currentUser);
-      console.log("On auth currentUser=>", currentUser);
+      // console.log("On auth currentUser=>", currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         // get+store jwt token -> localstorage
@@ -71,11 +71,11 @@ const AuthProvider = ({ children }) => {
           });
 
         // *******//
-        console.log("On authProvider if =>");
+        // console.log("On authProvider if =>");
 
        
       } else {
-        console.log("On authProvider else =>");
+        // console.log("On authProvider else =>");
         localStorage.removeItem("access-token");
         setLoading(false); //added later
 
