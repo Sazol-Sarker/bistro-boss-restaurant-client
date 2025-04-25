@@ -98,7 +98,6 @@ const AdminHome = () => {
     innerRadius,
     outerRadius,
     percent,
-    
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -123,15 +122,17 @@ const AdminHome = () => {
 
   return (
     <div className="text-center my-5">
-      <h2 className="text-3xl font-bold my-5">
+      <h2 className="text-xl md:text-2xl font-bold my-5">
         Hi,
         <span className="ml-2 text-amber-400">
           {user?.email ? user.displayName : "Adventurer"}
-        </span>
-        . Welcome to Admin home!
+        </span> <br />
+        <span >Welcome to Admin home!</span>
       </h2>
 
-      <div className="flex-grow ">
+      {/* admin stats */}
+      {/* <div className="flex-grow "> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {/* <StatCard stat={stats[0]}></StatCard> */}
 
         {stats.map((stat, idx) => (
@@ -146,63 +147,65 @@ const AdminHome = () => {
       </div>
 
       {/* rechart charts */}
-      <div className="flex gap-2 items-center justify-center mt-5">
+      <div className="flex flex-col md:flex-row gap-16 mt-5">
         {/* bar chart */}
-        <div className="w-1/2">
-          <BarChart
-            width={500}
-            height={300}
-            data={chartData}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="category" />
-            <YAxis />
-            <Bar
-              dataKey="quantity"
-              fill="#8884d8"
-              shape={<TriangleBar />}
-              label={{ position: "top" }}
+        <div className="w-full md:w-1/2 mx-auto">
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart
+              width={500}
+              height={300}
+              data={chartData}
+              margin={{
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
             >
-              {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-              ))}
-            </Bar>
-          </BarChart>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="category" />
+              <YAxis />
+              <Bar
+                dataKey="quantity"
+                fill="#8884d8"
+                shape={<TriangleBar />}
+                label={{ position: "top" }}
+              >
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
         {/* pie chart */}
-        <div className="w-1/2">
-          <PieChart width={500} height={300}>
-            <Pie
-              data={pieChartData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {pieChartData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Legend></Legend>
-          </PieChart>
+        <div className="w-full md:w-1/2 mx-auto">
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart width={500} height={300}>
+              <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {pieChartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Legend></Legend>
+            </PieChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>
   );
 };
-
-// werehe6859@provko.com
 
 export default AdminHome;

@@ -14,16 +14,16 @@ const FeaturedItem = () => {
       ></SectionTitle>
 
       {/* bg-slate-500/40 */}
-      <div className="bg-slate-700/60 flex flex-col md:flex-row gap-2 items-center justify-center py-20">
+      <div className="bg-slate-700/60 flex flex-col  md:flex-row gap-2 items-center justify-center py-20">
         <div>
           <img
             src={featuredImg}
             alt="featuredItem"
-            className="w-96 h-96 ml-5 md:ml-20"
+            className="w-96 h-96  md:ml-20"
           />
         </div>
 
-        <div className="w-1/2  text-white ml-16">
+        <div className="w-1/2  text-white ml-16 md:ml-24">
           <p>March 20, 2023</p>
           <h3>WHERE CAN I GET SOME?</h3>
           <p>

@@ -1,4 +1,7 @@
 /* Change bullet color */
+.swiper-pagination{
+  position: absolute;
+}
 .swiper-pagination-bullet {
     width: 20px;  /* Adjust size if needed */
     height: 20px;

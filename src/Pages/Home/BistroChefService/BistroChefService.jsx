@@ -37,19 +37,21 @@ const BistroChefService = () => {
         }}
       >
         <div className="absolute w-3/4 mx-auto bg-white p-6 text-center  shadow-lg rounded-md">
-          <h2 className="text-3xl uppercase mb-3">
+          <h2 className="text-xl md:text-2xl lg:text-3xl uppercase mb-3">
             Bistro Boss
           </h2>
-          <p className="text-gray-700">
-            Welcome to Bistro Boss, where exceptional flavors meet a cozy,
-            inviting atmosphere. Our menu is a fusion of mouth-watering dishes,
+          <p className="text-gray-700 italic">
+            <b className="text-green-800">Welcome to Bistro Boss</b>, where exceptional flavors meet a cozy,
+            inviting atmosphere. <br /> At Bistro Boss, we believe that every meal should be an
+            experience, not just a meal. <br /> Visit us today and indulge in our
+            exquisite offerings that are sure to delight your taste buds!
+
+            {/* \ Our menu is a fusion of mouth-watering dishes,
             carefully crafted by expert chefs using only the finest ingredients.
             Whether you're craving a delicious salad, a hearty main course, or a
             tempting dessert, we have something to satisfy every palate. Enjoy a
             memorable dining experience with our welcoming service and charming
-            ambiance. At Bistro Boss, we believe that every meal should be an
-            experience, not just a meal. Visit us today and indulge in our
-            exquisite offerings that are sure to delight your taste buds!
+            ambiance.  */}
           </p>
         </div>
       </div>

@@ -30,7 +30,7 @@ const PopularMenu = () => {
   }
 
   return (
-    <section className="flex flex-col mt-5 md:mt-10">
+    <section className="flex flex-col mt-5">
       <SectionTitle
         heading={"FROM OUR MENU"}
         subHeading={"Check it out"}

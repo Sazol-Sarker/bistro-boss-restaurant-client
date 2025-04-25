@@ -25,6 +25,8 @@ import Reservation from "../Pages/Dashboard/Reservation/Reservation";
 import ContactUs from "../Components/ContactUs/ContactUs";
 import ContactMsg from "../Pages/Dashboard/ContactMsg/ContactMsg";
 import PaymentSuccess from "../Components/PaymentSuccess/PaymentSuccess";
+import Fail from "../Components/Fail/Fail";
+import Cancel from "../Components/Cancel/Cancel";
 
 const router = createBrowserRouter([
   {
@@ -151,6 +153,14 @@ const router = createBrowserRouter([
   {
     path:'/payment-success',
     element:<PaymentSuccess></PaymentSuccess>
+  },
+  {
+    path:'/fail',
+    element:<Fail></Fail>
+  },
+  {
+    path:'/cancel',
+    element:<Cancel></Cancel>
   }
 ]);
 

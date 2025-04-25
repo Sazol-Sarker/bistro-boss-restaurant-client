@@ -22,7 +22,7 @@ const PaymentSuccess = () => {
   }, [navigate]);
 
   return (
-    <div>
+    <div className='flex flex-col items-center justify-center'>
       <h2>Payment successful!</h2>
       <p>Redirecting in {countdown} second{countdown !== 1 ? 's' : ''}...</p>
     </div>

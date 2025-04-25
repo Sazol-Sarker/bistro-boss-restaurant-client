@@ -36,13 +36,27 @@ const Category = () => {
         pagination={{
           clickable: true,
         }}
-        // autoplay={{
-        //   delay: 2500, // Delay between transitions (ms)
-        //   disableOnInteraction: false, // Keeps autoplay running after user interaction
-        // }}
-        // loop={true} // Enables infinite looping
+        autoplay={{
+          delay: 2500, // Delay between transitions (ms)
+          disableOnInteraction: false, // Keeps autoplay running after user interaction
+        }}
+        loop={true} // Enables infinite looping
         modules={[FreeMode, Pagination]}
         className="mySwiper"
+        breakpoints={{
+          0: {
+            slidesPerView: 1, // 1 slide per view on small screens
+          },
+          640: {
+            slidesPerView: 2, // 2 slides per view for screens wider than 640px
+          },
+          768: {
+            slidesPerView: 3, // 3 slides per view for screens wider than 768px
+          },
+          1024: {
+            slidesPerView: 4, // 4 slides per view for screens wider than 1024px
+          },
+        }}
         
       >
         {/* <SwiperSlide>
@@ -53,64 +67,64 @@ const Category = () => {
       </SwiperSlide> */}
         {/* slide 1 */}
         <SwiperSlide className="relative">
-          <img src={slideImg1} alt="slideImg1" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <img src={slideImg1} alt="slideImg1" className="w-full h-auto"     />
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Salads
           </h3>
         </SwiperSlide>
         {/* slide 2 */}
         <SwiperSlide className="relative">
           <img src={slideImg2} alt="slideImg2" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Soups
           </h3>
         </SwiperSlide>
         {/* slide 3 */}
         <SwiperSlide className="relative">
           <img src={slideImg3} alt="slideImg3" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Pizzas
           </h3>
         </SwiperSlide>
         {/* slide 4 */}
         <SwiperSlide className="relative">
           <img src={slideImg4} alt="slideImg4" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Deserts
           </h3>
         </SwiperSlide>
         {/* slide 5 */}
         <SwiperSlide className="relative">
           <img src={slideImg5} alt="slideImg5" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Salads
           </h3>
         </SwiperSlide>
         {/* slide 6 */}
         <SwiperSlide className="relative">
           <img src={slideImg5} alt="slideImg5" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Soups
           </h3>
         </SwiperSlide>
         {/* slide 6 */}
         <SwiperSlide className="relative">
           <img src={slideImg5} alt="slideImg5" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Pizzas
           </h3>
         </SwiperSlide>
         {/* slide 6 */}
         <SwiperSlide className="relative">
           <img src={slideImg5} alt="slideImg5" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Salads
           </h3>
         </SwiperSlide>
         {/* slide 6 */}
         <SwiperSlide className="relative">
           <img src={slideImg5} alt="slideImg5" className="w-full h-auto" />
-          <h3 className="absolute inset-x-0 bottom-4 text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
+          <h3 className="absolute inset-x-0 bottom-4 text-xl md:text-2xl uppercase text-center text-white font-bold bg-black bg-opacity-50 py-2">
             Salads
           </h3>
         </SwiperSlide>
