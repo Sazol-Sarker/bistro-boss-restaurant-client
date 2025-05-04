@@ -36,9 +36,10 @@ const ContactMsg = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th className="hidden md:table-cell">Name</th>
+              <th className="hidden md:table-cell">Email</th>
+              <th className="hidden md:table-cell">Phone</th>
+              <th className="table-cell md:hidden">Name/Email/Phone</th>
               <th>Message</th>
             </tr>
           </thead>
@@ -46,9 +47,13 @@ const ContactMsg = () => {
             {
                 contactMsg.map((msg,idx)=><tr key={idx}>
                     <th>{idx+1}</th>
-                    <td>{msg.name||"Unknown"}</td>
-                    <td>{msg.email||"Unknown"}</td>
-                    <td>{msg.phone||"Unknown"}</td>
+                    <td className="hidden md:table-cell text-green-500">{msg.name||"Unknown"}</td>
+                    <td className="hidden md:table-cell">{msg.email||"Unknown"}</td>
+                    <td className="hidden md:table-cell">{msg.phone||"Unknown"}</td>
+                    {/*for mobile device */}
+                    <td className="table-cell md:hidden">{msg.name||"Unknown"} <br />
+                    {msg.email||"Unknown"} <br />
+                    {msg.phone||"Unknown"}</td>
                     <td>{msg.msg}</td>
                   </tr>
                 )

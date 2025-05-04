@@ -2,7 +2,9 @@
   position: static;
   padding: 5px;
 }
-
+.react-tabs__tab{
+  padding: 5px !important;
+}
 .swiper-pagination-bullet {
   width: 35px;
   height: 35px;

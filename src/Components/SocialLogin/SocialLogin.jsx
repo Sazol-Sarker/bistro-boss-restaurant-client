@@ -45,9 +45,9 @@ const SocialLogin = () => {
   };
 
   return (
-    <div className="text-center mt-4">
+    <div className="text-center my-4">
       <p>Or sign up with</p>
-      <div className="flex justify-center space-x-6 mt-2">
+      <div className="flex justify-center space-x-6 my-2">
         <button className="btn btn-circle btn-outline">
           <FaFacebookF />
         </button>

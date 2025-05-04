@@ -69,7 +69,7 @@ const ContactUs = () => {
       ></SectionTitle>
 
       {/* reservation form */}
-      <div className="w-2/3 mx-auto">
+      <div className="w-full max-w-lg mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-slate-100 p-10 flex flex-col items-center"
@@ -141,7 +141,7 @@ const ContactUs = () => {
             <label className="form-control">
               <div className="label">
                 <span className="label-text">
-                  Kindly express your care in a short way.
+                  Kindly express your care <span className="hidden md:inline">in a short way</span> <span className="inline md:hidden">shortly</span>.
                 </span>
               </div>
             </label>

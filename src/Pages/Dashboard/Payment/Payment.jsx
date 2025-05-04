@@ -18,11 +18,12 @@ const Payment = () => {
 
       {/* payment options: stripe/sslcommerz */}
 
-      <div className="relative w-1/5">
+      <div className="relative max-w-32">
+      {/* <div className="relative w-1/5"> */}
         <select
           name="paymentOptions"
           onClick={(e) => setPaymentGateway(e.target.value)}
-          className="appearance-none w-full input input-bordered pr-10"
+          className="appearance-none w-full max-w-lg input input-bordered pr-10"
         >
           <option value="stripe">Stripe</option>
           <option value="SSLCommerz">SSL Commerz</option>

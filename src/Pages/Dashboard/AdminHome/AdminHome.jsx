@@ -147,9 +147,9 @@ const AdminHome = () => {
       </div>
 
       {/* rechart charts */}
-      <div className="flex flex-col md:flex-row gap-16 mt-5">
+      <div className="flex flex-col lg:flex-row md:gap-4 mt-5">
         {/* bar chart */}
-        <div className="w-full md:w-1/2 mx-auto">
+        <div className="w-full lg:w-1/2 mx-auto">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
               width={500}
@@ -179,7 +179,7 @@ const AdminHome = () => {
           </ResponsiveContainer>
         </div>
         {/* pie chart */}
-        <div className="w-full md:w-1/2 mx-auto">
+        <div className="w-full lg:w-1/2 mx-auto">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart width={500} height={300}>
               <Pie

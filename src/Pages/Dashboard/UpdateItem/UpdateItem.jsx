@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import useMenu from "../../../hooks/useMenu";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const UpdateItem = () => {
   const navigate = useNavigate();
@@ -44,9 +45,10 @@ const UpdateItem = () => {
 
   return (
     <div>
-      <h2 className="text-xl">UPDATE ITEM</h2>
+      <SectionTitle subHeading={"Carefully update"} heading={"Update Item"}></SectionTitle>
+      <h2 className="text-lg md:text-xl uppercase mb-2 ml-1">updated item details</h2>
       
-      <div className="w-full border-2">
+      <div className="w-full border-2 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
           {/* form */}
           <div className="w-full p-4">

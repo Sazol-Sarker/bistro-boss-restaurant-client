@@ -62,9 +62,10 @@ const UserHome = () => {
       </h2>
 
       {/* stats */}
-      <div className="flex-grow ">
+      {/* <div className="flex-grow gap-2 "> */}
         {/* <StatCard stat={stats[0]}></StatCard> */}
 
+      <div className="grid grid-cols-1 md:grid-cols-3 my-5 gap-2 ">
         {displayUserStats.map((userStat, idx) => (
           <StatCard
             key={idx}
@@ -76,19 +77,19 @@ const UserHome = () => {
         ))}
       </div>
 
-      <div className="w-full flex mt-7 *:h-96">
-        <div className="bg-[#D1A054]/80 mx-0 flex flex-col items-center justify-center text-2xl font-semibold  w-1/2">
+      <div className="w-full flex mt-10 *:h-96 *:max-h-96 my-5">
+        <div className=" bg-[#D1A054]/80 mx-0 flex flex-col items-center justify-center text-xl md:text-2xl  font-semibold  w-1/2">
           <img src={profileLogo} alt="user" className="w-20 mb-2 rounded-full border-2 border-[#D1A054]" />
           <h2 className="text-teal-700">
             {user?.displayName ? user.displayName : "Anonymous"}
           </h2>
-          <h2 className="text-teal-700">
+          <h2 className="text-teal-700 text-xs md:text-xl">
             {user?.email ? user.email : "Anonymous Email"}
           </h2>
         </div>
         <div className="divider divider-horizontal join-horizontal m-0"></div>
         <div className="bg-[#FEF9C3]  mx-0 w-1/2 pb-5 flex flex-col items-center justify-center">
-          <h2 className="text-3xl font-semibold mb-5">Your Activites</h2>
+          <h2 className="text-xl  md:text-2xl font-semibold mb-5">Your Activites</h2>
           {/* {
             userStats.map((stat,idx)=><p key={idx} className="text-lg">{`${statIcons[idx]} ${stat}`}</p>)
           } */}
@@ -98,7 +99,7 @@ const UserHome = () => {
               <div className="mx-2">
                 <FaDollarSign className="text-2xl text-[#cfba3e]" />
               </div>
-              <div className="text-[#cfba3e]">
+              <div className="text-[#cfba3e] text-sm md:text-lg">
                 Total Spent: {userStats[0]}$
                 
               </div>
@@ -107,8 +108,8 @@ const UserHome = () => {
               <div className="mx-2">
                 <FaShoppingCart className="text-2xl text-[#0088FE]" />
               </div>
-              <div className="text-[#0088FE]">
-                Total Completed Orders: {userStats[1]}
+              <div className="text-[#0088FE] text-sm md:text-lg">
+                Total <span className="hidden md:inline">Completed</span> Orders: {userStats[1]}
                 
               </div>
             </div>
@@ -116,7 +117,7 @@ const UserHome = () => {
               <div className="mx-2">
                 <FaComments className="text-2xl text-[#6abdc0]" />
               </div>
-              <div className="text-[#6abdc0]">
+              <div className="text-[#6abdc0] text-sm md:text-lg">
                 {/* TOCHECK: not working */}
                 {/* Total Reviews: {userStats[2]} */}
                 Total Reviews: {userStats[2]}
@@ -127,8 +128,8 @@ const UserHome = () => {
               <div className="mx-2">
                 <FaBoxOpen className="text-2xl text-[#a2468d]" />
               </div>
-              <div className="text-[#a2468d]">
-                Total Completed Payments: {userStats[3]}
+              <div className="text-[#a2468d] text-sm md:text-lg">
+                Total <span className="hidden md:inline">Completed</span> Payments: {userStats[3]}
                 
               </div>
             </div>
@@ -137,7 +138,8 @@ const UserHome = () => {
                 <FaBowlFood className="text-2xl text-[#cd595d]" />
               </div>
               {/* <div className=" text-[#cd595d]">Number of Food Items in cart: {userStats[3]}</div> */}
-              <div className=" text-[#cd595d]">Number of Food Items in cart: {cart.length}</div>
+              <div className=" text-[#cd595d] text-sm md:text-lg">
+              <span className="hidden md:inline">Total Number of Food</span> Items in cart: {cart.length}</div>
             </div>
           </div>
         </div>

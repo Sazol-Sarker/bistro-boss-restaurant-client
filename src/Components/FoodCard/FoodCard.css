@@ -3,11 +3,13 @@
   flex-direction: column;
   justify-content: center;
   border:none;
+  
   color: #444; /* Default inactive color */
   padding: 10px 20px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+
 
 
 .react-tabs ul {

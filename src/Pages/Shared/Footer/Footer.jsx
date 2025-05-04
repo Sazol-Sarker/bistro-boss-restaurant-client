@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Contact Section */}
         <div className="bg-[#1F2937] flex flex-col items-center py-10">
-          <h6 className="text-lg uppercase">Contact Us</h6>
+          <h6 className="text-md md:text-lg uppercase">Contact Us</h6>
           <p>123 ABS Street, Uni 21, Bangladesh</p>
           <p>+88 123456789</p>
           <p>Mon - Fri: 08:00 - 22:00</p>
@@ -17,7 +17,7 @@ const Footer = () => {
       
         {/* Social Media Section */}
         <div className="bg-[#111827]  flex flex-col items-center text-white text-center py-10">
-          <h6 className="footer-title uppercase text-lg">Follow Us</h6>
+          <h6 className="footer-title uppercase text-md md:text-lg">Follow Us</h6>
           <p className="text-gray-400">Join us on social media</p>
 
           {/* Social Icons */}

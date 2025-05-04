@@ -51,12 +51,12 @@ const Reservation = () => {
       ></SectionTitle>
 
       {/* reservation form */}
-      <div className="w-2/3 mx-auto">
+      <div className="w-full max-w-md mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-slate-100 p-10 flex flex-col items-center"
         >
-          <div className=" flex justify-between gap-x-1 w-full">
+          <div className=" flex justify-between flex-col md:flex-row gap-x-1 w-full">
             {/* date */}
             <div className="w-full mb-5">
               <label className="form-control w-full">
@@ -127,7 +127,7 @@ const Reservation = () => {
             </div>
           </div>
           {/* 2nd row */}
-          <div className=" flex justify-between gap-x-1">
+          <div className=" flex justify-between gap-x-1 flex-col md:flex-row">
             {/* name */}
             <div className="w-full mb-5">
               <label className="form-control w-full">

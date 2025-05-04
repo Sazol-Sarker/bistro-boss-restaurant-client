@@ -28,7 +28,7 @@ const FoodCard = ({ item }) => {
         itemImage: image,
         itemPrice: price,
       };
-      // axios.post("http://localhost:5000/carts", cartItem).then((res) => {
+      // axios.post("https://bistro-boss-restaurant-server-zjo1.onrender.com/carts", cartItem).then((res) => {
       axiosSecure.post("/carts", cartItem).then((res) => {
         if(res.data.insertedId){
 
@@ -54,8 +54,8 @@ const FoodCard = ({ item }) => {
     }
   };
   return (
-    <div className="card card-compact bg-base-100 border-2 border-gray-800 w-80 md:w-96 shadow-xl">
-      <figure>
+    <div className="card card-compact bg-base-100 border-2 w-64 md:w-80 lg:w-96 shadow-xl">
+      <figure className="w-full">
         <img src={image} alt={name} className="w-full" />
       </figure>
       <p className="bg-[#111827] text-white right-0 absolute mr-4 mt-4 px-4 py-2 rounded-sm">
@@ -70,7 +70,7 @@ const FoodCard = ({ item }) => {
         </div> */}
         <button
           onClick={() => handleAddToCart(item)}
-          className="btn w-1/2 mx-auto mt-5 text-[#BB8506] hover:bg-[#1F2937] border-b-2 border-0 border-[#BB8506]"
+          className="btn w-3/4 md:w-3/5 mx-auto mt-5  text-xs md:text-[15px] text-[#BB8506] hover:bg-[#1F2937] border-b-2 border-0 border-[#BB8506]"
         >
           ADD TO CART
         </button>

@@ -37,7 +37,7 @@ const Recommendation = () => {
           return (
             <div
               key={idx}
-              className="card mb-5 md:mb-10 bg-base-100 w-80 md:w-96 shadow-xl"
+              className="card mb-5 md:mb-10 bg-base-100 w-72 md:w-80 lg:w-96 shadow-xl"
             >
               <figure className="rounded-none">
                 <img src={item.image} alt="featuredItem" />

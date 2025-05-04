@@ -67,8 +67,8 @@ const AddReview = () => {
       ></SectionTitle>
 
       {/* review form */}
-      <div className="w-2/3 mx-auto">
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-slate-100 p-10">
+      <div className="w-6/7 max-w-xl mx-auto">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-lg mx-auto bg-slate-100 p-4 md:p-10">
           <div className="flex flex-col justify-center items-center w-full mb-5">
             <label className="form-control w-1/3 text-center">
               <div className="label">
@@ -87,7 +87,7 @@ const AddReview = () => {
           <div className="w-full mb-5">
             <label className="form-control w-full">
               <div className="label">
-                <span className="label-text">Which recipe you liked most?</span>
+                <span className="label-text">Which recipe you liked most ?</span>
               </div>
             </label>
             <input
@@ -144,7 +144,7 @@ const AddReview = () => {
             <label className="form-control w-full">
               <div className="label">
                 <span className="label-text">
-                  Do you have any suggestion for us?
+                  Do you have any suggestion <span className="hidden md:inline">for us</span>?
                 </span>
               </div>
             </label>
@@ -161,7 +161,7 @@ const AddReview = () => {
             <label className="form-control">
               <div className="label">
                 <span className="label-text">
-                  Kindly express your care in a short way.
+                  Kindly express your care <span className="hidden md:inline">in a short way</span> <span className="inline md:hidden">shortly</span>.
                 </span>
               </div>
             </label>

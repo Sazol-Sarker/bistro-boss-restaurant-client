@@ -16,9 +16,9 @@ const Location = () => {
           <div className="bg-[#D1A054] text-white py-5 w-full flex flex-col items-center">
             <FaPhone  className="text-xl"></FaPhone>
           </div>
-          <div className="flex flex-col items-center mt-5 bg-[#uppercase font-semibold]">
-            <h2 className="uppercase font-semibold text-[20px]">Phone</h2>
-            <p>(+880) 156972265949</p>
+          <div className="flex flex-col  mt-5  ">
+            <h2 className="uppercase font-semibold text-xs  md:text-lg ">Phone</h2>
+            <p className="text-xs  md:text-lg">(+880) 156972265949</p>
           </div>
         </div>
         {/* middle */}
@@ -26,9 +26,9 @@ const Location = () => {
           <div className="bg-[#D1A054] text-white py-5 w-full flex flex-col items-center">
             <FaMapLocation className="text-xl"></FaMapLocation>
           </div>
-          <div className="flex flex-col items-center mt-5 bg-[#uppercase font-semibold]">
-            <h2 className="uppercase font-semibold text-[20px]">ADDRESS</h2>
-            <p>Road No.2, Gulshan, Dhaka</p>
+          <div className="flex flex-col  mt-5  ">
+            <h2 className="uppercase font-semibold text-xs  md:text-lg">ADDRESS</h2>
+            <p className="text-xs  md:text-lg">Road No.2, Gulshan, Dhaka</p>
           </div>
         </div>
         {/* right */}
@@ -37,9 +37,9 @@ const Location = () => {
             <FaStopwatch  className="text-xl"></FaStopwatch>
           </div>
           <div className="flex flex-col items-center mt-5 bg-[#uppercase font-semibold]">
-            <h2 className="uppercase font-semibold text-[20px]">Working Hours</h2>
-            <p>Mon - Fri: 08:00 - 22:00</p>
-            <p>Sat - Sun: 10:00 - 23:00</p>
+            <h2 className="uppercase font-semibold text-xs  md:text-lg">Working Hours</h2>
+            <p className="text-xs  md:text-lg">Mon - Fri: 08:00 - 22:00</p>
+            <p className="text-xs md:text-lg">Sat - Sun: 10:00 - 23:00</p>
           </div>
         </div>
       </div>

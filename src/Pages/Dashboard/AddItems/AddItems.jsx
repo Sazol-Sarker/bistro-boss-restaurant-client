@@ -57,10 +57,10 @@ const AddItems = () => {
         heading={"ADD AN ITEM"}
       ></SectionTitle>
 
-      <div className="">
+      <div className="w-full">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="m-10 bg-slate-100 p-10"
+          className="m-2 md:m-10 bg-slate-100 p-2 md:p-10 w-full"
         >
           {/* recipe name */}
           <div className="flex flex-col w-full mb-5">
@@ -137,7 +137,7 @@ const AddItems = () => {
             />
           </div>
 
-          <button className="btn bg-[#915e91aa] text-white text-lg mt-5">
+          <button className="btn bg-[#915e91aa] text-white mt-5 text-md md:text-lg ">
             Add Item <GiForkKnifeSpoon />
           </button>
         </form>

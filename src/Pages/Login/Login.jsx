@@ -116,20 +116,20 @@ const Login = () => {
       <title>Bistro Boss | Login</title>
 
       <div
-        className="min-h-screen flex items-center justify-center px-4 md:px-10"
+        className="min-h-screen flex items-center justify-center px-0 md:px-1 lg:px-5"
         style={{
           backgroundImage: `url(${loginBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center bg-white/70 p-10 rounded-xl shadow-lg max-w-6xl w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center bg-white/70 p-5 md:p-10 rounded-xl shadow-lg max-w-6xl w-full">
           {/* Left side: Image */}
           <div className="hidden md:flex items-center justify-center">
             <img
               src={loginBannerImg}
               alt="Login Banner"
-              className="max-w-sm md:max-w-md "
+              className="max-w-64 md:max-w-xs lg:max-w-md "
             />
           </div>
 

@@ -62,7 +62,7 @@ const role="user"
 
         // POST API
         const newUser = { name, email,role };
-        axios.post("http://localhost:5000/users", newUser).then((res) => {
+        axios.post("https://bistro-boss-restaurant-server-zjo1.onrender.com/users", newUser).then((res) => {
           // console.log("DB response, user create=>", res.data);
           if (res.data.insertedId)
             toast(`New user ${email} created in DB, welcome!`);
@@ -115,7 +115,7 @@ const role="user"
           backgroundPosition: "center",
         }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center bg-white/70 p-10 rounded-xl shadow-lg max-w-6xl w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center bg-white/70 md:p-5 rounded-xl shadow-lg max-w-6xl w-full">
           {/* Right side: Login Form */}
           <div className="w-full max-w-md mx-auto">
             <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
@@ -124,7 +124,7 @@ const role="user"
             <form
               // onSubmit={handleSubmit((data) => console.log(data))}
               onSubmit={handleSubmit(handleRegister)}
-              className="space-y-4"
+              className="space-y-4 mx-2"
             >
               {/* Name */}
               <div className="form-control">
@@ -242,11 +242,11 @@ const role="user"
             </form>
           </div>
           {/* Left side: Image */}
-          <div className="hidden md:flex items-center justify-center">
+          <div className="hidden md:flex items-center justify-center ml-2">
             <img
               src={registerBannerImg}
               alt="Register Banner"
-              className="max-w-sm md:max-w-md "
+              className="max-w-36 md:max-w-xs "
             />
           </div>
         </div>

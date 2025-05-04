@@ -12,7 +12,7 @@ const MenuItemGrid = ({title, menuItems, btnText = "ORDER YOUR FAVOURITE FOOD" }
       </div>
       <div className="flex justify-center items-center  mt-5">
         <Link to={`/order/${title}`}>
-          <button className="btn-neutral p-2 rounded-lg border-teal-500 border-b-4  text-[#1F2937] font-bold uppercase text-sm md:text-xl">
+          <button className="btn-neutral text-xs md:text-lg lg:text-xl p-2 rounded-lg border-teal-500 border-b-4  text-[#1F2937] font-bold uppercase ">
             {/* View Full Menu */}
             {btnText}
           </button>

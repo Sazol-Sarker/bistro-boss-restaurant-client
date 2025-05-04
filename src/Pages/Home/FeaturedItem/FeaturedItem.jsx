@@ -23,7 +23,7 @@ const FeaturedItem = () => {
           />
         </div>
 
-        <div className="w-1/2  text-white ml-16 md:ml-24">
+        <div className="md:w-1/2  text-white ml-16 md:ml-24">
           <p>March 20, 2023</p>
           <h3>WHERE CAN I GET SOME?</h3>
           <p>

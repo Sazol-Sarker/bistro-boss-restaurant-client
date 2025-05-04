@@ -49,20 +49,20 @@ const Cart = () => {
   return (
     <>
     <title>Bistro Boss | Cart</title>
-      <div className="uppercase w-full flex justify-evenly gap-x-5 mt-5">
-        <h2 className="text-2xl font-bold">Total Items In orders: {totalOrders}</h2>
-        <h2 className="text-2xl font-bold">Total price: ${totalPrice}</h2>
+      <div className="uppercase w-full flex items-center justify-evenly gap-x-5 mt-5 mx-1">
+        <h2 className="text-sm lg:text-xl font-bold">Total Items In orders: {totalOrders}</h2>
+        <h2 className="text-sm md:text-md lg:text-xl font-bold">Total price: ${totalPrice}</h2>
 
         {Number(totalPrice) > 0 ? (
           <Link to={"/dashboard/payment"}>
-            <button className="text-xl text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg">
+            <button className="text-sm md:text-md text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg mr-3">
               pay
             </button>
           </Link>
         ) : (
           <button
             disabled
-            className="text-xl opacity-30 text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg"
+            className="text-sm md:text-md opacity-30 text-white bg-[#D1A054] uppercase py-2 px-4 rounded-lg"
           >
             pay
           </button>
@@ -70,14 +70,14 @@ const Cart = () => {
       </div>
       {/* cart items table */}
       {cart.length > 0 ? (
-        <div className="my-5">
-          <div className="overflow-x-auto w-full">
+        <div className="my-5 ">
+          <div className="overflow-x-auto w-full mx-2 ">
             <table className="table">
               {/* head */}
               <thead>
                 <tr className="uppercase bg-[#D1A054] text-white ">
                   <th className="rounded-tl-md">#</th>
-                  <th>Item Image</th>
+                  <th className="hidden md:table-cell">Item Image</th>
                   <th>Item name</th>
                   <th>Price</th>
                   <th className="rounded-tr-md">action</th>
@@ -86,9 +86,9 @@ const Cart = () => {
               <tbody>
                 {/* cart items */}
                 {cart.map((item, idx) => (
-                  <tr key={idx}>
+                  <tr key={idx} className="text-[10px] md:text-md lg:text-lg">
                     <th>{idx + 1}</th>
-                    <td>
+                    <td className="hidden md:table-cell">
                       <div className="flex items-center gap-3">
                         <div className="avatar mask mask-squircle h-12 w-12">
                           <img src={item.itemImage} alt={item.itemName} />
@@ -97,7 +97,7 @@ const Cart = () => {
                     </td>
                     <td>{item.itemName}</td>
                     <td>${item.itemPrice}</td>
-                    <th>
+                    <th >
                       <button
                         onClick={() => handleCartItemDelete(item._id)}
                         className="btn btn-ghost btn-md bg-[#B91C1C] p-2"

@@ -5,11 +5,11 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa6";
 import { FaUserSecret } from "react-icons/fa6";
 import { toast } from "react-toastify";
-import useAxiosPublic from './../../../hooks/useAxiosPublic';
+import useAxiosPublic from "./../../../hooks/useAxiosPublic";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const axiosPublic=useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
   const {
     data: users = [],
     refetch,
@@ -55,10 +55,6 @@ const AllUsers = () => {
   };
 
   const handleUserRoleUpdate = (id, newRole) => {
-   
-   
-   
-   
     // PATCH API: users
     axiosSecure
       .patch(`/users/${id}`, { newRole })
@@ -76,7 +72,7 @@ const AllUsers = () => {
 
   return (
     <div className="w-full ">
-      <div className="text-2xl font-bold uppercase flex items-center justify-center mb-5">
+      <div className="text-xl md:text-2xl font-bold uppercase flex items-center justify-center mb-5">
         total users: {users.length}
       </div>
 
@@ -86,21 +82,26 @@ const AllUsers = () => {
           <table className="table table-zebra">
             {/* head */}
             <thead>
-              <tr className="text-md uppercase text-center bg-[#D1A054] text-white">
-                <th className="border-tl-2 rounded-tl-md">#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>roll</th>
-                <th className="border-tr-2 rounded-tr-md">action</th>
+              <tr className="text-xs md:text-md uppercase text-center bg-[#D1A054] text-white ">
+                <th className="border-tl-2 rounded-tl-md hidden md:table-cell">
+                  #
+                </th>
+                <th className="hidden md:table-cell">Name</th>
+                <th className="md:hidden">Name/Email</th>
+                <th className="hidden md:table-cell ">Email</th>
+                <th className="border-tr-2 rounded-tr-md">Role/Action</th>
+                {/* <th className="b"></th> */}
               </tr>
             </thead>
             <tbody className="text-center">
               {users.map((user, idx) => (
                 <tr key={idx}>
-                  <th>{idx + 1}</th>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                  <th className="hidden md:table-cell">{idx + 1}</th>
                   <td>
+                    <span className="text-green-500">{user.name}</span> <br /><span className="md:hidden">{user.email}</span>
+                  </td>
+                  <td className="hidden md:table-cell">{user.email}</td>
+                  <td className="flex  items-center justify-center gap-x-1 md:gap-x-4">
                     {user?.role == "admin" ? (
                       <div className="cursor-pointer flex flex-col items-center">
                         <button className="px-2 py-1 bg-[#D1A054] w-10 flex flex-col items-center rounded-md ">
@@ -108,7 +109,7 @@ const AllUsers = () => {
                             onClick={() =>
                               handleUserRoleUpdate(user._id, "user")
                             }
-                            className="text-lg "
+                            className="text-lg"
                           />
 
                           <span>{user?.role}</span>
@@ -116,7 +117,10 @@ const AllUsers = () => {
                       </div>
                     ) : (
                       <div className="cursor-pointer flex flex-col items-center">
-                        <button className="px-2 py-1 bg-[#D1A054] w-10 text-white flex flex-col items-center rounded-md ">
+                        <button
+                          title="Click to change role"
+                          className="px-2 py-1 bg-[#D1A054] w-10 text-white flex flex-col items-center rounded-md "
+                        >
                           <FaUsers
                             onClick={() =>
                               handleUserRoleUpdate(user._id, "admin")
@@ -127,15 +131,23 @@ const AllUsers = () => {
                         </button>
                       </div>
                     )}
-                  </td>
-                  <td>
+
                     <button
+                      title="Delete the user"
                       onClick={() => handleUserDelete(user._id)}
                       className="bg-[#B91C1C] p-2 rounded-lg"
                     >
                       <FaRegTrashCan className="text-white" />
                     </button>
                   </td>
+                  {/* <td>
+                    <button title="Delete the user"
+                      onClick={() => handleUserDelete(user._id)}
+                      className="bg-[#B91C1C] p-2 rounded-lg"
+                    >
+                      <FaRegTrashCan className="text-white" />
+                    </button>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
@@ -143,7 +155,7 @@ const AllUsers = () => {
         </div>
       ) : (
         <div className="text-red-500 flex justify-center">
-          {" "}
+          
           No users found in database
         </div>
       )}

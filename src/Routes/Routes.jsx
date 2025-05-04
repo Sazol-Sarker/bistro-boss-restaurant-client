@@ -137,7 +137,7 @@ const router = createBrowserRouter([
         element: <UpdateItem></UpdateItem>,
         loader: ({ params }) =>
           // https://bistro-boss-restaurant-server-zjo1.onrender.com
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://bistro-boss-restaurant-server-zjo1.onrender.com/menu/${params.id}`),
       },
       {
         path:'contactMsg',

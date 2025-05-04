@@ -41,7 +41,7 @@ const Order = () => {
   }, [category,categories]);
 
   return (
-    <div>
+    <div className="w-full mx-auto">
       <title>Bistro Boss Restaurant | Order</title>
       <CoverImg
         heading={"Order Food"}
@@ -53,7 +53,9 @@ const Order = () => {
 
       {/* Food category tabs */}
       <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-        <TabList className="flex justify-center font-bold text-gray-700/70 text-[16px] mb-5">
+      {/* flex flex-wrap justify-center */}
+      {/* grid grid-cols-4 place-items-center */}
+        <TabList className="flex items-center justify-center mb-5 px-2 md:px-4 font-bold text-gray-700/70 text-[12px] md:text-[16px]">
           <Tab>
             <Link to="/order/offered">Offered</Link>
           </Tab>

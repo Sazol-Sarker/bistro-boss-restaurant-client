@@ -54,27 +54,27 @@ const ManageItems = () => {
 
         {/* table */}
         <div>
-          <div className="flex items-center justify-center text-3xl font-bold mb-5">
+          <div className="flex items-center justify-center text-2xl md:text-3xl font-bold mb-5">
             Total items: {menu.length}
           </div>
           <div className="overflow-x-auto">
             <table className="table">
               {/* head */}
               <thead>
-                <tr className="uppercase">
+                <tr className="uppercase text-xs md:text-md lg:text-[16px]">
                   <th>#</th>
-                  <th>item image</th>
+                  <th className="hidden md:table-cell">item image</th>
                   <th>item name</th>
                   <th>price</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Edit/Delete</th>
+                  {/* <th>Delete</th> */}
                 </tr>
               </thead>
               <tbody>
                 {menu.map((food, idx) => (
                   <tr key={idx}>
                     <th>{idx + 1}</th>
-                    <td>
+                    <td className="hidden md:table-cell">
                       <div className="flex items-center gap-3">
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
@@ -88,19 +88,25 @@ const ManageItems = () => {
                     <th>
                       <Link to={`/dashboard/updateItem/${food._id}`}>
                         {/* <Link to={`/menu/${food._id}`}> */}
-                        <button className="btn btn-ghost btn-xs bg-[#D1A054]">
+                        <button className="btn btn-ghost btn-xs md:btn-sm bg-[#D1A054]">
                           <FaEdit className="text-white text-md"></FaEdit>
                         </button>
                       </Link>
+                      <button
+                        onClick={() => handleFoodItemDelete(food)}
+                        className="btn btn-ghost btn-xs md:btn-sm bg-[#B91C1C] ml-1 md:ml-2"
+                      >
+                        <FaTrash className="text-white text-md"></FaTrash>
+                      </button>
                     </th>
-                    <th>
+                    {/* <th>
                       <button
                         onClick={() => handleFoodItemDelete(food)}
                         className="btn btn-ghost btn-xs bg-[#B91C1C]"
                       >
                         <FaTrash className="text-white text-md"></FaTrash>
                       </button>
-                    </th>
+                    </th> */}
                   </tr>
                 ))}
               </tbody>

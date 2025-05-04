@@ -8,7 +8,7 @@ import {
 const StatCard = ({title,Icon,stat,bgColor}) => {
    
   return (
-    <div className="stats shadow bg-slate-200  text-white">
+    <div className="stats shadow bg-slate-200  text-white max-w-md">
       <div className={`stat ${bgColor?.join(' ')}`}>
         <div className="stat-figure text-secondary text-white items-center">
           {Icon}
