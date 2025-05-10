@@ -31,11 +31,13 @@ const NavBar = () => {
       <li><Link to="/">Home</Link></li>
       {!isAdmin && <li><Link to="/contact">Contact</Link></li>}
       {!user && <li><Link to="/register">Register</Link></li>}
-      <li>
+      {
+        user&&<li>
         <Link to={user ? (isAdmin ? "/dashboard/adminHome" : "/dashboard/userHome") : "/dashboard/userHome"}>
           Dashboard
         </Link>
       </li>
+      }
       <li>
         <Link to="/menu" className="flex items-center gap-1">
           Menu
